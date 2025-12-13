@@ -13,6 +13,7 @@ type Product = {
     description: string;
     images: ProductImage[];
     categories: ProductCategory[];
+    grouped_products: number[]
 };
 
 export default Product;

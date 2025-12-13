@@ -7,6 +7,8 @@ import Image from "next/image";
 import StockImage from "../../../../public/woocommerce-placeholder.webp";
 import {IoIosCart} from "react-icons/io";
 import ProductCategories from "@/components/products/ProductCategories";
+import getProductsByIds from "@/lib/api/getProductsByIds";
+import ProductGroupedProducts from "@/components/products/ProductGroupedProducts.jsx";
 
 interface ProductPageProps {
     params: {
@@ -23,16 +25,17 @@ export default async function ProductPage({params}: ProductPageProps) {
         return <div>Product not found</div>;
     }
 
+    const groupedProducts = await getProductsByIds(product.grouped_products);
 
     console.log(product)
 
     return (
         <div className="container mx-auto py-10">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="flex flex-wrap -mx-4">
 
                 {/* LEFT SIDE: IMAGES */}
-                <div>
+                <div className={"w-full md:w-2/5 px-4 mb-4"}>
                     {product.images?.length > 0 ? (
                         <Image
                             src={product.images[0].src}
@@ -55,7 +58,7 @@ export default async function ProductPage({params}: ProductPageProps) {
                 </div>
 
                 {/* RIGHT SIDE: PRODUCT INFO */}
-                <div className="flex flex-col gap-6">
+                <div className={"flex flex-col gap-6 w-full md:w-3/5 px-4"}>
 
 
                     <ProductCategories categories={product.categories} className={""} />
@@ -82,6 +85,8 @@ export default async function ProductPage({params}: ProductPageProps) {
                         className="prose max-w-none text-gray-700 description"
                         dangerouslySetInnerHTML={{__html: product.description}}
                     />
+
+                    <ProductGroupedProducts products={groupedProducts} />
 
                     {/* ADD TO CART (if needed later) */}
                     <button
