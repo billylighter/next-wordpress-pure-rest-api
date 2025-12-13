@@ -9,6 +9,7 @@ import {IoIosCart} from "react-icons/io";
 import ProductCategories from "@/components/products/ProductCategories";
 import getProductsByIds from "@/lib/api/getProductsByIds";
 import ProductGroupedProducts from "@/components/products/ProductGroupedProducts.jsx";
+import BackButton from "@/components/BackButton";
 
 interface ProductPageProps {
     params: {
@@ -32,11 +33,15 @@ export default async function ProductPage({params}: ProductPageProps) {
     return (
         <div className="container mx-auto py-10">
 
+            <div>
+                <BackButton/>
+            </div>
+
             <div className="flex flex-wrap -mx-4">
 
                 {/* LEFT SIDE: IMAGES */}
                 <div className={"w-full md:w-2/5 px-4 mb-4"}>
-                    {product.images?.length > 0 ? (
+                    {product.images && product.images.length > 0 ? (
                         <Image
                             src={product.images[0].src}
                             alt={product.images[0].alt || product.name}
@@ -55,6 +60,7 @@ export default async function ProductPage({params}: ProductPageProps) {
                             draggable={false}
                         />
                     )}
+
                 </div>
 
                 {/* RIGHT SIDE: PRODUCT INFO */}

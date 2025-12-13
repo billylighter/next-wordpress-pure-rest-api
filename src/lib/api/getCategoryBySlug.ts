@@ -13,7 +13,6 @@ export default async function getCategoryBySlug(slug: string): Promise<ProductCa
         next: { revalidate: 60 },
     });
 
-    console.log(res)
 
     if (!res.ok) return null;
 

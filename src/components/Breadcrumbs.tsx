@@ -6,7 +6,7 @@ export default function Breadcrumbs() {
 
     const pathname = usePathname();
     const segments = pathname.split("/").filter(Boolean);
-    console.log(segments)
+
     if(segments.length === 0) return <></>;
 
     let path = "";

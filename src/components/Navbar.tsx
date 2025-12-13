@@ -47,6 +47,9 @@ export default function Navbar() {
                     <Link href="/" className="py-3 text-gray-800 hover:text-black border-b border-gray-200" onClick={() => setIsOpen(false)}>
                         Home
                     </Link>
+                    <Link href="/shop" className="py-3 text-gray-800 hover:text-black border-b border-gray-200" onClick={() => setIsOpen(false)}>
+                        Shop
+                    </Link>
                     <Link href="/categories" className="py-3 text-gray-800 hover:text-black border-b border-gray-200" onClick={() => setIsOpen(false)}>
                         Categories
                     </Link>

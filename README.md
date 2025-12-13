@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Need to add variables to .env files from .env.example
+go to admin area your wordpress and generate few keys for the woocommerce basic auth:
+/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys
+**WC_CONSUMER_KEY**, **WC_CONSUMER_SECRET**
+
+Add your wordpress url there:
+**NEXT_PUBLIC_WORDPRESS_URL**, **WORDPRESS_URL**
+
 First, run the development server:
 
 ```bash

@@ -18,9 +18,6 @@ export default async function getProductBySlug(slug: string): Promise<Product | 
             next: { revalidate: 0 },
         });
 
-        console.log(res)
-        console.log(res)
-
         if (!res.ok) {
             console.error("Failed to fetch products:", res.status);
             return null;

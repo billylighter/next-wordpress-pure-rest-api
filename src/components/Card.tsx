@@ -17,23 +17,34 @@ export default function Card({ item, children }: CardProps) {
     return (
         <div className="bg-neutral-primary-soft border border-gray-200 rounded-lg shadow overflow-hidden flex flex-col">
 
-            {/* IMAGE BLOCK */}
-            <Image
-                src={
-                    isProduct(item)
-                        ? item.images?.[0]?.src ?? StockImage
-                        : item.image?.src ?? StockImage
-                }
-                alt={
-                    isProduct(item)
-                        ? item.images?.[0]?.alt ?? item.name
-                        : item.image?.alt ?? item.name
-                }
-                width={400}
-                height={200}
-                className="w-full h-48 object-cover"
-                draggable={false}
-            />
+            <div className="
+    relative w-full overflow-hidden
+    aspect-[4/3]
+    sm:aspect-[3/2]
+    lg:aspect-[3/3]
+">
+                <Image
+                    fill
+                    sizes="
+            (max-width: 640px) 100vw,
+            (max-width: 1024px) 50vw,
+            33vw
+        "
+                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    src={
+                        isProduct(item)
+                            ? item.images?.[0]?.src ?? StockImage
+                            : item.image?.src ?? StockImage
+                    }
+                    alt={
+                        isProduct(item)
+                            ? item.images?.[0]?.alt ?? item.name
+                            : item.image?.alt ?? item.name
+                    }
+                    draggable={false}
+                />
+            </div>
+
 
             <div className="p-6 text-center flex flex-col flex-1 justify-between">
 
@@ -45,7 +56,7 @@ export default function Card({ item, children }: CardProps) {
 
                 <Link href={
                         isProduct(item)
-                            ? `/product/${item.slug}`
+                            ? `/shop/${item.slug}`
                             : `/categories/${item.slug}`
                     }
                     className="inline-flex items-center justify-center text-white bg-gray-900 hover:bg-gray-700 border border-transparent hover:bg-brand-strong font-medium rounded-lg text-sm px-4 py-2.5 focus:outline-none">
