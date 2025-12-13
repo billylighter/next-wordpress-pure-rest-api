@@ -9,6 +9,7 @@ type Product = {
     price: string;
     regular_price: string;
     short_description: string;
+    description: string;
     images: ProductImage[];
 };
 
