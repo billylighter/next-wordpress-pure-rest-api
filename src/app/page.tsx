@@ -1,15 +1,13 @@
 import React from "react";
-import getParentProductCategories from "@/lib/api/getParentProductCategories";
+import getProductCategories from "@/lib/api/getProductCategories";
 import ParentCategories from "@/components/categories/ParentCategories";
 
 export default async function ProductCategoriesPage() {
-    const categories = await getParentProductCategories();
+    const categories = await getProductCategories({hide_empty: true});
 
     return (
 
-
-            <ParentCategories categories={categories}/>
-
+        <ParentCategories categories={categories}/>
 
     );
 }

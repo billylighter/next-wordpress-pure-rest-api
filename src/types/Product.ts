@@ -1,4 +1,5 @@
 import ProductImage from "@/types/ProductImage";
+import ProductCategory from "@/types/ProductCategory";
 
 type Product = {
     id: number;
@@ -11,6 +12,7 @@ type Product = {
     short_description: string;
     description: string;
     images: ProductImage[];
+    categories: ProductCategory[];
 };
 
 export default Product;

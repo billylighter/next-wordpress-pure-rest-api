@@ -1,13 +1,12 @@
-export type ProductCategory = {
+type ProductCategory = {
     id: number;
     name: string;
     slug: string;
-    count: number;
-    description: string;
-    image?: {
-        src: string;
-        alt: string;
-    };
-};
+    parent: number;
+    description?: string;
+    image?: undefined;
+    images?: undefined;
+    parentCategory?: ProductCategory;
+}
 
 export default ProductCategory;

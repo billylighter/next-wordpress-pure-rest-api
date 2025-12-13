@@ -1,9 +1,12 @@
 "use server";
 
+
+
 import getProductBySlug from "@/lib/api/getProductBySlug";
 import Image from "next/image";
 import StockImage from "../../../../public/woocommerce-placeholder.webp";
-import {IoIosCart} from "react-icons/io"; // update path if needed
+import {IoIosCart} from "react-icons/io";
+import ProductCategories from "@/components/products/ProductCategories";
 
 interface ProductPageProps {
     params: {
@@ -13,13 +16,13 @@ interface ProductPageProps {
 
 export default async function ProductPage({params}: ProductPageProps) {
     const {slug} = await params;
-    if (slug) console.log(slug)
 
     const product = await getProductBySlug(slug);
 
     if (!product) {
         return <div>Product not found</div>;
     }
+
 
     console.log(product)
 
@@ -54,6 +57,9 @@ export default async function ProductPage({params}: ProductPageProps) {
                 {/* RIGHT SIDE: PRODUCT INFO */}
                 <div className="flex flex-col gap-6">
 
+
+                    <ProductCategories categories={product.categories} className={""} />
+
                     {/* HEADER / PRODUCT TITLE */}
                     <h1 className="text-3xl font-bold">{product.name}</h1>
 
@@ -73,7 +79,7 @@ export default async function ProductPage({params}: ProductPageProps) {
 
                     {/* DESCRIPTION */}
                     <div
-                        className="prose max-w-none text-gray-700"
+                        className="prose max-w-none text-gray-700 description"
                         dangerouslySetInnerHTML={{__html: product.description}}
                     />
 

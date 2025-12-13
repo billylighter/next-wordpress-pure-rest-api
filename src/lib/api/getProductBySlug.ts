@@ -22,7 +22,7 @@ export default async function getProductBySlug(slug: string): Promise<Product | 
         console.log(res)
 
         if (!res.ok) {
-            console.error("Failed to fetch product:", res.status);
+            console.error("Failed to fetch products:", res.status);
             return null;
         }
 

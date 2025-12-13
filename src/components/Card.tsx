@@ -50,8 +50,7 @@ export default function Card({ item, children }: CardProps) {
                             ? `/product/${item.slug}`
                             : `/category/${item.slug}`
                     }
-                    className="inline-flex items-center justify-center text-white bg-gray-900 hover:bg-gray-700 border border-transparent hover:bg-brand-strong font-medium rounded-lg text-sm px-4 py-2.5 focus:outline-none"
-                >
+                    className="inline-flex items-center justify-center text-white bg-gray-900 hover:bg-gray-700 border border-transparent hover:bg-brand-strong font-medium rounded-lg text-sm px-4 py-2.5 focus:outline-none">
                     View
 
                     <IoIosArrowRoundForward size={20} />
