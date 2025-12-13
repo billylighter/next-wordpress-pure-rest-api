@@ -9,7 +9,6 @@ import {IoIosCart} from "react-icons/io";
 import ProductCategories from "@/components/products/ProductCategories";
 import getProductsByIds from "@/lib/api/getProductsByIds";
 import ProductGroupedProducts from "@/components/products/ProductGroupedProducts.jsx";
-import BackButton from "@/components/BackButton";
 
 interface ProductPageProps {
     params: {
@@ -28,14 +27,8 @@ export default async function ProductPage({params}: ProductPageProps) {
 
     const groupedProducts = await getProductsByIds(product.grouped_products);
 
-    console.log(product)
-
     return (
         <div className="container mx-auto py-10">
-
-            <div>
-                <BackButton/>
-            </div>
 
             <div className="flex flex-wrap -mx-4">
 
