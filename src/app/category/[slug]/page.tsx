@@ -2,6 +2,7 @@ import getCategoryBySlug from "@/lib/api/getCategoryBySlug";
 import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
 import Product from "@/types/Product";
 import Card from "@/components/Card";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 interface CategoryPageProps {
     params: {
@@ -24,14 +25,16 @@ export default async function CategoryPage({params}: CategoryPageProps) {
     console.log(products)
 
     return (
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product: Product) => (
-                <Card item={product} key={product.id}>
-                    <div className={"text-gray-500 mb-5"} dangerouslySetInnerHTML={{__html: product.short_description}}></div>
-                </Card>
-            ))}
-        </div>
+        <>
+            <Breadcrumbs />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {products.map((product: Product) => (
+                    <Card item={product} key={product.id}>
+                        <div className={"text-gray-500 mb-5"} dangerouslySetInnerHTML={{__html: product.short_description}}></div>
+                    </Card>
+                ))}
+            </div>
+        </>
 
     );
 }
