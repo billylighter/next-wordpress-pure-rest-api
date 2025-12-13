@@ -4,16 +4,14 @@ import ProductCategories from "@/components/categories/ProductCategories";
 import ProductCategory from "@/types/ProductCategory";
 
 export default async function ProductCategoriesPage() {
-    const categories = await getProductCategories({hide_empty: true});
+    const categories = await getProductCategories({hide_empty: true, parent: 0});
 
-    const childCategories = categories.filter(
-        (category: ProductCategory) => category.parent !== 0
-    );
+    console.log(categories)
 
     return (
 
         <>
-            <ProductCategories categories={childCategories}/>
+            <ProductCategories categories={categories}/>
         </>
 
     );

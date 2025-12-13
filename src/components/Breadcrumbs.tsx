@@ -3,8 +3,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"; // Next 13+ App Router
 
 export default function Breadcrumbs() {
-    const pathname = usePathname(); // e.g., "/products/categories/shoes"
-    const segments = pathname.split("/").filter(Boolean); // ["products", "categories", "shoes"]
+
+    const pathname = usePathname();
+    const segments = pathname.split("/").filter(Boolean);
+    console.log(segments)
+    if(segments.length === 0) return <></>;
 
     let path = "";
 

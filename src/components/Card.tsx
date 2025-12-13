@@ -15,11 +15,10 @@ interface CardProps {
 export default function Card({ item, children }: CardProps) {
 
     return (
-        <div className="bg-neutral-primary-soft border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+        <div className="bg-neutral-primary-soft border border-gray-200 rounded-lg shadow overflow-hidden flex flex-col">
 
             {/* IMAGE BLOCK */}
-            <Image
-                src={
+            <Image src={
                     isProduct(item)
                         ? item.images?.[0]?.src || StockImage
                         : item.image?.src || StockImage
@@ -35,7 +34,6 @@ export default function Card({ item, children }: CardProps) {
                 draggable={false}
             />
 
-
             <div className="p-6 text-center flex flex-col flex-1 justify-between">
 
                 <h5 className="mt-2 mb-4 text-xl font-semibold tracking-tight text-heading">
@@ -44,8 +42,7 @@ export default function Card({ item, children }: CardProps) {
 
                 {children}
 
-                <Link
-                    href={
+                <Link href={
                         isProduct(item)
                             ? `/product/${item.slug}`
                             : `/categories/${item.slug}`

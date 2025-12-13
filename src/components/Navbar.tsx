@@ -15,7 +15,7 @@ export default function Navbar() {
     return (
         <>
             {/* Navbar */}
-            <nav className="bg-white text-gray-800 shadow-md px-4 py-3 flex items-center justify-between sticky top-0 w-full z-50">
+            <nav className="bg-white text-gray-800 shadow px-4 py-3 flex items-center justify-between sticky top-0 w-full z-50">
                 {/* Logo / Brand */}
                 <div className="text-lg font-bold">MyBrand</div>
 

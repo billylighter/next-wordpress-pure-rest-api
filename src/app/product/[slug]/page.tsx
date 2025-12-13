@@ -63,21 +63,22 @@ export default async function ProductPage({params}: ProductPageProps) {
 
                     <ProductCategories categories={product.categories} className={""} />
 
-                    {/* HEADER / PRODUCT TITLE */}
-                    <h1 className="text-3xl font-bold">{product.name}</h1>
+                    <div className="flex flex-col md:flex-row flex-wrap justify-between items-start gap-2">
 
-                    {/*<hr className={"text-gray-700"}/>*/}
+                        {/* HEADER / PRODUCT TITLE */}
+                        <h1 className="text-3xl font-bold">{product.name}</h1>
 
-                    {/* PRICE */}
-                    <div>
-                        <p className="text-2xl font-semibold text-gray-900">
-                            {product.price} USD
-                        </p>
-                        {product.regular_price && product.regular_price !== product.price && (
-                            <p className="line-through text-gray-400">
-                                {product.regular_price} USD
+                        {/* PRICE */}
+                        <div>
+                            <p className="text-sm font-semibold text-black">
+                                {product.price} USD
                             </p>
-                        )}
+                            {product.regular_price && product.regular_price !== product.price && (
+                                <p className="line-through text-red-400">
+                                    {product.regular_price} USD
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     {/* DESCRIPTION */}

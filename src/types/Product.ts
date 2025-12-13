@@ -11,9 +11,10 @@ type Product = {
     regular_price: string;
     short_description: string;
     description: string;
+    image?: undefined;
     images: ProductImage[];
     categories: ProductCategory[];
-    grouped_products: number[]
+    grouped_products: number[];
 };
 
 export default Product;

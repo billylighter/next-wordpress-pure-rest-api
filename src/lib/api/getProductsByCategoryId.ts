@@ -1,5 +1,6 @@
 export default async function getProductsByCategoryId(categoryId: number) {
     const url = new URL(`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/wc/v3/products`);
+
     url.searchParams.set("category", categoryId.toString());
 
     const res = await fetch(url.toString(), {
