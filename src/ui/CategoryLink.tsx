@@ -12,7 +12,7 @@ const CategoryLink: React.FC<CategoryLinkProps> = ({ category, className }) => {
     const {name, slug} = category;
     return (
         <Link
-            href={`/category/${slug}`}
+            href={`/categories/${slug}`}
             className={clsx(
                 "text-white text-sm bg-gray-900 hover:bg-gray-700 rounded inline-flex justify-start items-center px-2 italic",
                 className

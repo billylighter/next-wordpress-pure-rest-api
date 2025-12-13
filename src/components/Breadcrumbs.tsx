@@ -3,14 +3,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"; // Next 13+ App Router
 
 export default function Breadcrumbs() {
-    const pathname = usePathname(); // e.g., "/products/category/shoes"
-    const segments = pathname.split("/").filter(Boolean); // ["products", "category", "shoes"]
+    const pathname = usePathname(); // e.g., "/products/categories/shoes"
+    const segments = pathname.split("/").filter(Boolean); // ["products", "categories", "shoes"]
 
     let path = "";
 
     return (
-        <nav aria-label="breadcrumb" className="text-sm mb-4">
-            <ol className="flex gap-2">
+        <nav aria-label="breadcrumb" className="text-xs">
+            <ol className="flex gap-2 uppercase">
                 <li>
                     <Link href="/">Home</Link>
                     <span className="mx-1">/</span>

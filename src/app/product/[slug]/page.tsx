@@ -58,7 +58,7 @@ export default async function ProductPage({params}: ProductPageProps) {
                 </div>
 
                 {/* RIGHT SIDE: PRODUCT INFO */}
-                <div className={"flex flex-col gap-6 w-full md:w-3/5 px-4"}>
+                <div className={"flex flex-col gap-2 w-full md:w-3/5 px-4"}>
 
 
                     <ProductCategories categories={product.categories} className={""} />
@@ -66,7 +66,7 @@ export default async function ProductPage({params}: ProductPageProps) {
                     {/* HEADER / PRODUCT TITLE */}
                     <h1 className="text-3xl font-bold">{product.name}</h1>
 
-                    <hr className={"text-gray-700"}/>
+                    {/*<hr className={"text-gray-700"}/>*/}
 
                     {/* PRICE */}
                     <div>
