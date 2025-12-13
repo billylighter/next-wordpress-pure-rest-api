@@ -1,3 +1,5 @@
+import ProductImage from "@/types/ProductImage";
+
 type ProductCategory = {
     id: number;
     count: number;
@@ -6,7 +8,7 @@ type ProductCategory = {
     url: string;
     parent: number;
     description?: string;
-    image?: undefined;
+    image?: ProductImage;
     images?: undefined;
     parentCategory?: ProductCategory;
 }

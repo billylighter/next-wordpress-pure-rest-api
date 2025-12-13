@@ -18,15 +18,16 @@ export default function Card({ item, children }: CardProps) {
         <div className="bg-neutral-primary-soft border border-gray-200 rounded-lg shadow overflow-hidden flex flex-col">
 
             {/* IMAGE BLOCK */}
-            <Image src={
+            <Image
+                src={
                     isProduct(item)
-                        ? item.images?.[0]?.src || StockImage
-                        : item.image?.src || StockImage
+                        ? item.images?.[0]?.src ?? StockImage
+                        : item.image?.src ?? StockImage
                 }
                 alt={
                     isProduct(item)
-                        ? item.images?.[0]?.alt || item.name
-                        : item.image?.alt || item.name
+                        ? item.images?.[0]?.alt ?? item.name
+                        : item.image?.alt ?? item.name
                 }
                 width={400}
                 height={200}

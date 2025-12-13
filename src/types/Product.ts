@@ -12,7 +12,8 @@ type Product = {
     short_description: string;
     description: string;
     image?: undefined;
-    images: ProductImage[];
+    images?: ProductImage[];
+
     categories: ProductCategory[];
     grouped_products: number[];
 };
