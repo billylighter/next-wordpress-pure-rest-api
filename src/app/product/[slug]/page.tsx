@@ -12,6 +12,9 @@ import ProductGroupedProducts from "@/components/single-product/ProductGroupedPr
 import {getProductBreadcrumbs} from "@/lib/breadcrumbs/getProductBreadcrumbs";
 import {notFound} from "next/navigation";
 import Breadcrumbs from "@/ui/Breadcrumbs";
+import {isProduct} from "@/app/utils/CheckEntyties";
+import OnSaleBadge from "@/components/single-product/OnSaleBadge";
+import React from "react";
 
 interface ProductPageProps {
     params: {
@@ -41,25 +44,31 @@ export default async function ProductPage({params}: ProductPageProps) {
 
                 {/* LEFT SIDE: IMAGES */}
                 <div className={"w-full md:w-2/5 px-4 mb-4"}>
-                    {product.images && product.images.length > 0 ? (
-                        <Image
-                            src={product.images[0].src}
-                            alt={product.images[0].alt || product.name}
-                            width={500}
-                            height={400}
-                            className="w-full rounded-lg object-cover"
-                            draggable={false}
-                        />
-                    ) : (
-                        <Image
-                            src={StockImage}
-                            alt={product.name}
-                            width={500}
-                            height={400}
-                            className="w-full h-auto rounded-lg"
-                            draggable={false}
-                        />
-                    )}
+
+                    <div className="relative">
+
+                        {(isProduct(product) && product.on_sale) && <OnSaleBadge />}
+
+                        {product.images && product.images.length > 0 ? (
+                            <Image
+                                src={product.images[0].src}
+                                alt={product.images[0].alt || product.name}
+                                width={500}
+                                height={400}
+                                className="w-full rounded-lg object-cover"
+                                draggable={false}
+                            />
+                        ) : (
+                            <Image
+                                src={StockImage}
+                                alt={product.name}
+                                width={500}
+                                height={400}
+                                className="w-full h-auto rounded-lg"
+                                draggable={false}
+                            />
+                        )}
+                    </div>
 
                 </div>
 

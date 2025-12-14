@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {getAllProducts} from "@/lib/api/getAllProducts";
-import ProductCategories from "@/components/shop/ProductCategories";
-import ProductsGrid from "@/components/shop/ProductCategories";
+import ProductCategories from "@/components/shop/ProductsGrid";
+import ProductsGrid from "@/components/shop/ProductsGrid";
 
 interface PageProps {
     params: {

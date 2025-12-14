@@ -11,7 +11,7 @@ export default function ProductsGrid({products}: ParentCategoriesProps) {
     return (
         <>
             {products.length === 0 ? (
-                <p>No categories found.</p>
+                <p>No products found.</p>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {products.map((product: Product) => (

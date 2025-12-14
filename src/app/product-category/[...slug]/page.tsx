@@ -1,9 +1,10 @@
 import React, {Suspense} from "react";
 import getCategoryBySlug from "@/lib/api/getCategoryBySlug";
 import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
-import ProductCategories from "@/components/shop/ProductCategories";
+import ProductCategories from "@/components/shop/ProductsGrid";
 import {notFound} from "next/navigation";
 import getChildCategoriesBySlug from "@/lib/api/getChildCategories";
+import CategoriesGrid from "@/components/categories/CategoriesGrid";
 
 
 interface PageProps {
@@ -38,7 +39,7 @@ export default async function CategoryPage({params}: PageProps) {
                 )}
             </header>
 
-            <ProductCategories categories={data} />
+            <CategoriesGrid data={data}/>
 
         </div>
     );

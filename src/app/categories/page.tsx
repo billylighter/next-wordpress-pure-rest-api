@@ -8,7 +8,7 @@ export default async function ProductCategoriesPage() {
     return (
 
         <>
-            <CategoriesGrid categories={categories}/>
+            <CategoriesGrid data={categories}/>
         </>
 
     );

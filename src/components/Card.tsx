@@ -23,7 +23,9 @@ export default function Card({item, children}: CardProps) {
         <div className="bg-neutral-primary-soft border border-gray-200 rounded shadow overflow-hidden flex flex-col">
 
             <div className="relative w-full overflow-hidden aspect-[4/3] sm:aspect-[3/2] lg:aspect-[3/3]">
-                {(isProduct(item) && item.on_sale === true) && <OnSaleBadge />}
+
+                {(isProduct(item) && item.on_sale) && <OnSaleBadge />}
+
                 <Image fill
                     className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
                     src={
