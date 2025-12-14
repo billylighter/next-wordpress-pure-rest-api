@@ -13,6 +13,7 @@ type Product = {
     description: string;
     image?: undefined;
     images?: ProductImage[] | undefined;
+    on_sale: boolean;
 
     categories: ProductCategory[];
     grouped_products: number[];
