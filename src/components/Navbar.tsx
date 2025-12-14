@@ -15,21 +15,23 @@ export default function Navbar() {
     return (
         <>
             {/* Navbar */}
-            <nav className="bg-white text-gray-800 shadow px-4 py-3 flex items-center justify-between sticky top-0 w-full z-50">
-                {/* Logo / Brand */}
-                <div className="text-lg font-bold">MyBrand</div>
+            <header className=" bg-white shadow">
+                <nav className="max-w-4xl mx-auto p-4 text-gray-800  px-4 py-3 flex items-center justify-between sticky top-0 w-full z-50">
+                    {/* Logo / Brand */}
+                    <div className="text-lg font-bold">MyBrand</div>
 
-                <Breadcrumbs />
+                    {/* Menu Toggle Button */}
+                    <button
+                        onClick={toggleMenu}
+                        className="p-2 focus:outline-none"
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                    </button>
+                </nav>
+            </header>
 
-                {/* Menu Toggle Button */}
-                <button
-                    onClick={toggleMenu}
-                    className="p-2 focus:outline-none"
-                    aria-label="Toggle menu"
-                >
-                    {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-                </button>
-            </nav>
+
 
             {/* Overlay */}
             {isOpen && (

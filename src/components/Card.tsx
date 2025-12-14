@@ -14,15 +14,12 @@ interface CardProps {
 
 export default function Card({ item, children }: CardProps) {
 
+    const itemPath = isProduct(item) ? `/product/${item.slug}` : `/product-category/${item.slug}`;
+
     return (
         <div className="bg-neutral-primary-soft border border-gray-200 rounded-lg shadow overflow-hidden flex flex-col">
 
-            <div className="
-    relative w-full overflow-hidden
-    aspect-[4/3]
-    sm:aspect-[3/2]
-    lg:aspect-[3/3]
-">
+            <div className="relative w-full overflow-hidden aspect-[4/3] sm:aspect-[3/2] lg:aspect-[3/3]">
                 <Image
                     fill
                     sizes="
@@ -54,11 +51,7 @@ export default function Card({ item, children }: CardProps) {
 
                 {children}
 
-                <Link href={
-                        isProduct(item)
-                            ? `/shop/${item.slug}`
-                            : `/categories/${item.slug}`
-                    }
+                <Link href={itemPath}
                     className="inline-flex items-center justify-center text-white bg-gray-900 hover:bg-gray-700 border border-transparent hover:bg-brand-strong font-medium rounded-lg text-sm px-4 py-2.5 focus:outline-none">
                     View
 

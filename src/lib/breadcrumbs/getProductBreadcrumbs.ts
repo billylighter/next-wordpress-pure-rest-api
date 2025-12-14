@@ -29,7 +29,7 @@ export async function getProductBreadcrumbs(
         { label: "Home", href: "/" },
         ...categoryChain.map(cat => ({
             label: cat.name,
-            href: `/category/${cat.slug}`
+            href: `/product-category/${cat.slug}`
         })),
         {
             label: product.name,

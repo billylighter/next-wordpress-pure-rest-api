@@ -9,12 +9,12 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 protocol: 'http',
-                hostname: 'woo-shop.local',
+                hostname: 'woo-product.local',
                 pathname: '/wp-content/uploads/**',
             },
             {
                 protocol: 'https',
-                hostname: 'woo-shop.local',
+                hostname: 'woo-product.local',
                 pathname: '/wp-content/uploads/**',
             },
         ],

@@ -29,7 +29,7 @@ export default function ProductGroupedProducts({products, className}: ProductGro
                     <tr key={product.id} className="hover:bg-gray-50">
                         {/* IMAGE */}
                         <td className="px-4 py-2">
-                            <Link href={`/shop/${product.slug}`}>
+                            <Link href={`/product/${product.slug}`}>
                                 <Image
                                     src={product.images?.[0]?.src || StockImage}
                                     alt={product.images?.[0]?.alt || product.name}
@@ -43,11 +43,11 @@ export default function ProductGroupedProducts({products, className}: ProductGro
 
                         {/* NAME */}
                         <td className="px-4 py-2 text-sm text-gray-900">
-                            <Link href={`/shop/${product.slug}`} className={"text-blue-600"}>{product.name}</Link>
+                            <Link href={`/product/${product.slug}`} className={"text-blue-600"}>{product.name}</Link>
                         </td>
 
                         {/* SKU */}
-                        {/*<td className="px-4 py-2 text-sm text-gray-500">{shop.sku || "-"}</td>*/}
+                        {/*<td className="px-4 py-2 text-sm text-gray-500">{product.sku || "-"}</td>*/}
 
                         {/* PRICE */}
                         <td className="px-4 py-2 text-sm text-gray-900">

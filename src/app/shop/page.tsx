@@ -13,12 +13,12 @@ interface PageProps {
 export default async function CategoryPage({params}: PageProps) {
 
     return (
-        <div>
+        <>
+
             <header className="text-center my-4">
                 <h1 className="text-xl font-semibold">Shop</h1>
             </header>
 
-
-        </div>
+        </>
     );
 }
