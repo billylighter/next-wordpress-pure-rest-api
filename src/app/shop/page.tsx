@@ -1,8 +1,7 @@
 import React, {Suspense} from "react";
-import getCategoryBySlug from "@/lib/api/getCategoryBySlug";
-import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
-import ProductCategories from "@/components/categories/ProductCategories";
-import {notFound} from "next/navigation";
+import {getAllProducts} from "@/lib/api/getAllProducts";
+import ProductCategories from "@/components/shop/ProductCategories";
+import ProductsGrid from "@/components/shop/ProductCategories";
 
 interface PageProps {
     params: {
@@ -10,7 +9,10 @@ interface PageProps {
     };
 }
 
-export default async function CategoryPage({params}: PageProps) {
+export default async function ShopPage({params}: PageProps) {
+
+    const products = await getAllProducts();
+
 
     return (
         <>
@@ -18,6 +20,8 @@ export default async function CategoryPage({params}: PageProps) {
             <header className="text-center my-4">
                 <h1 className="text-xl font-semibold">Shop</h1>
             </header>
+
+            <ProductsGrid products={products}/>
 
         </>
     );

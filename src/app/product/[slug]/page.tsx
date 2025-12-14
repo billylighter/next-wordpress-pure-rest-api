@@ -6,9 +6,9 @@ import getProductBySlug from "@/lib/api/getProductBySlug";
 import Image from "next/image";
 import StockImage from "../../../../public/woocommerce-placeholder.webp";
 import {IoIosCart} from "react-icons/io";
-import ProductCategories from "@/components/products/ProductCategories";
+import ProductCategoriesLinks from "@/components/single-product/ProductCategoriesLinks";
 import getProductsByIds from "@/lib/api/getProductsByIds";
-import ProductGroupedProducts from "@/components/products/ProductGroupedProducts.jsx";
+import ProductGroupedProducts from "@/components/single-product/ProductGroupedProducts.jsx";
 import {getProductBreadcrumbs} from "@/lib/breadcrumbs/getProductBreadcrumbs";
 import {notFound} from "next/navigation";
 import Breadcrumbs from "@/ui/Breadcrumbs";
@@ -67,7 +67,7 @@ export default async function ProductPage({params}: ProductPageProps) {
                 <div className={"flex flex-col gap-2 w-full md:w-3/5 px-4"}>
 
 
-                    <ProductCategories categories={product.categories} className={""} />
+                    <ProductCategoriesLinks categories={product.categories} className={""} />
 
                     <div className="flex flex-col md:flex-row flex-wrap justify-between items-start gap-2">
 

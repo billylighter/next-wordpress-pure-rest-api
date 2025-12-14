@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import getCategoryBySlug from "@/lib/api/getCategoryBySlug";
 import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
-import ProductCategories from "@/components/categories/ProductCategories";
+import ProductCategories from "@/components/shop/ProductCategories";
 import {notFound} from "next/navigation";
 import getChildCategoriesBySlug from "@/lib/api/getChildCategories";
 

@@ -19,7 +19,7 @@ export default async function getProductBySlug(slug: string): Promise<Product | 
         });
 
         if (!res.ok) {
-            console.error("Failed to fetch products:", res.status);
+            console.error("Failed to fetch single-product:", res.status);
             return null;
         }
 

@@ -6,7 +6,7 @@ interface ProductCategoriesProps {
     className: string
 }
 
-export default function ProductCategories({categories, className}: ProductCategoriesProps) {
+export default function ProductCategoriesLinks({categories, className}: ProductCategoriesProps) {
 
     if (!categories || categories.length === 0) return <></>; // optional fallback
 

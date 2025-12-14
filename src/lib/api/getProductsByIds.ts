@@ -22,7 +22,7 @@ export default async function getProductsByIds(ids: number[]): Promise<Product[]
 
         if (!res.ok) {
             const text = await res.text();
-            console.error("Failed to fetch products:", res.status, text);
+            console.error("Failed to fetch single-product:", res.status, text);
             return [];
         }
 

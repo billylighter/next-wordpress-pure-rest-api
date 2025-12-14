@@ -6,7 +6,7 @@ interface ParentCategoriesProps {
     categories: ProductCategory[];
 }
 
-export default function ProductCategories({categories}: ParentCategoriesProps) {
+export default function CategoriesGrid({categories}: ParentCategoriesProps) {
     return (
         <>
             {categories.length === 0 ? (
