@@ -9,6 +9,9 @@ import {IoIosCart} from "react-icons/io";
 import ProductCategories from "@/components/products/ProductCategories";
 import getProductsByIds from "@/lib/api/getProductsByIds";
 import ProductGroupedProducts from "@/components/products/ProductGroupedProducts.jsx";
+import {getProductBreadcrumbs} from "@/lib/breadcrumbs/getProductBreadcrumbs";
+import {notFound} from "next/navigation";
+import Breadcrumbs from "@/ui/Breadcrumbs";
 
 interface ProductPageProps {
     params: {
@@ -21,14 +24,18 @@ export default async function ProductPage({params}: ProductPageProps) {
 
     const product = await getProductBySlug(slug);
 
-    if (!product) {
-        return <div>Product not found</div>;
-    }
+    if (!product) return notFound();
+
+    const breadcrumbs = await getProductBreadcrumbs(product);
 
     const groupedProducts = await getProductsByIds(product.grouped_products);
 
     return (
         <div className="container mx-auto py-10">
+
+            <div>
+                <Breadcrumbs items={breadcrumbs} />
+            </div>
 
             <div className="flex flex-wrap -mx-4">
 

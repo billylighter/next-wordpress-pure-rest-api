@@ -7,7 +7,7 @@ export default async function getProductsByCategoryId(categoryId : number, param
         if (typeof value === "boolean") {
             url.searchParams.set(key, value ? "1" : "0"); // WooCommerce uses 1/0 for booleans
         } else {
-            url.searchParams.set(key, value.toString());
+            url.searchParams.set(key, value);
         }
     });
 
