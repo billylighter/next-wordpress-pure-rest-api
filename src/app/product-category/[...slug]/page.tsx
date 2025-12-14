@@ -3,6 +3,8 @@ import getCategoryBySlug from "@/lib/api/getCategoryBySlug";
 import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
 import ProductCategories from "@/components/categories/ProductCategories";
 import {notFound} from "next/navigation";
+import getChildCategoriesBySlug from "@/lib/api/getChildCategories";
+
 
 interface PageProps {
     params: {
@@ -12,11 +14,20 @@ interface PageProps {
 
 export default async function CategoryPage({params}: PageProps) {
     const {slug} = await params;
-    const category = await getCategoryBySlug(String(slug));
+    const category = await getCategoryBySlug(String(slug.at(-1)));
 
     if(!category) return notFound();
-    const categoryProducts = await getProductsByCategoryId(Number(category.id), {hide_empty: true});
-    if(!category) return notFound();
+    const categoryChildren = await getChildCategoriesBySlug(category, {hide_empty: true});
+
+    if(!categoryChildren) return notFound();
+
+    const data = categoryChildren.length !== 0
+        ? await getChildCategoriesBySlug(category, { hide_empty: true })
+        : await getProductsByCategoryId(category.id, { hide_empty: true });
+
+
+
+    console.log(categoryChildren.length)
 
     return (
         <div>
@@ -27,7 +38,8 @@ export default async function CategoryPage({params}: PageProps) {
                 )}
             </header>
 
-            <ProductCategories categories={categoryProducts} />
+            <ProductCategories categories={data} />
+
         </div>
     );
 }
