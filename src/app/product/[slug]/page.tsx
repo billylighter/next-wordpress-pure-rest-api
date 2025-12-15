@@ -15,6 +15,7 @@ import Breadcrumbs from "@/ui/Breadcrumbs";
 import {isProduct} from "@/app/utils/CheckEntyties";
 import OnSaleBadge from "@/components/single-product/OnSaleBadge";
 import React from "react";
+import ProductPrice from "@/components/single-product/ProductPrice";
 
 interface ProductPageProps {
     params: {
@@ -34,9 +35,9 @@ export default async function ProductPage({params}: ProductPageProps) {
     const groupedProducts = await getProductsByIds(product.grouped_products);
 
     return (
-        <div className="container mx-auto py-10">
+        <div className="container mx-auto">
 
-            <div>
+            <div className={"mb-4"}>
                 <Breadcrumbs items={breadcrumbs} />
             </div>
 
@@ -78,27 +79,17 @@ export default async function ProductPage({params}: ProductPageProps) {
 
                     <ProductCategoriesLinks categories={product.categories} className={""} />
 
-                    <div className="flex flex-col md:flex-row flex-wrap justify-between items-start gap-2">
+                    <div className="flex flex-col md:flex-row flex-wrap justify-between items-center gap-2 my-3">
 
                         {/* HEADER / PRODUCT TITLE */}
-                        <h1 className="text-3xl font-bold">{product.name}</h1>
+                        <h1 className="text-xl font-bold">{product.name}</h1>
 
                         {/* PRICE */}
-                        <div>
-                            <p className="text-sm font-semibold text-black">
-                                {product.price} USD
-                            </p>
-                            {product.regular_price && product.regular_price !== product.price && (
-                                <p className="line-through text-red-400">
-                                    {product.regular_price} USD
-                                </p>
-                            )}
-                        </div>
+                        <ProductPrice product={product} className={"text-lg"} />
                     </div>
 
                     {/* DESCRIPTION */}
-                    <div
-                        className="prose max-w-none text-gray-700 description"
+                    <div className="prose max-w-none text-gray-700 description mb-4"
                         dangerouslySetInnerHTML={{__html: product.description}}
                     />
 

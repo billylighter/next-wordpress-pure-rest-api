@@ -34,6 +34,10 @@ body {
     margin-bottom: 1rem;
 }
 
+.description p:last-child{
+    margin-bottom: 0!important;
+}
+
 /* Headings */
 .description h1,
 .description h2,
