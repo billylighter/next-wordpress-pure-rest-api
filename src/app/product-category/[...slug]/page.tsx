@@ -3,6 +3,7 @@ import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
 import {notFound} from "next/navigation";
 import CategoriesGrid from "@/components/categories/CategoriesGrid";
 import {getAllCategories} from "@/lib/api/woocommerce/getAllCategories";
+import {getAllProducts} from "@/lib/api/woocommerce/getAllProducts";
 
 interface PageProps {
     params: {
@@ -22,7 +23,7 @@ export default async function CategoryPage({params}: PageProps) {
 
     const data = categoryChildren.length !== 0
         ? await getAllCategories({ hide_empty: true,  parent: category.id})
-        : await getProductsByCategoryId(category.id, { hide_empty: true });
+        : await getAllProducts({ hide_empty: true, category: category.id });
 
     return (
         <div>
