@@ -4,7 +4,6 @@ import Image from "next/image";
 import StockImage from "../../../../public/woocommerce-placeholder.webp";
 import {IoIosCart} from "react-icons/io";
 import ProductCategoriesLinks from "@/components/single-product/ProductCategoriesLinks";
-import getProductsByIds from "@/lib/api/getProductsByIds";
 import ProductGroupedProducts from "@/components/single-product/ProductGroupedProducts.jsx";
 import {getProductBreadcrumbs} from "@/lib/breadcrumbs/getProductBreadcrumbs";
 import {notFound} from "next/navigation";
@@ -31,13 +30,16 @@ export default async function ProductPage({params}: ProductPageProps) {
 
     const breadcrumbs = await getProductBreadcrumbs(product);
 
-    const groupedProducts = await getProductsByIds(product.grouped_products);
+    const groupedProducts =
+        (product.grouped_products.length !== 0) ? await getAllProducts(
+            {include: product.grouped_products.join(',')}
+        ) : [];
 
     return (
         <div className="container mx-auto">
 
             <div className={"mb-4"}>
-                <Breadcrumbs items={breadcrumbs} />
+                <Breadcrumbs items={breadcrumbs}/>
             </div>
 
             <div className="flex flex-wrap -mx-4">
@@ -47,7 +49,7 @@ export default async function ProductPage({params}: ProductPageProps) {
 
                     <div className="relative">
 
-                        {(isProduct(product) && product.on_sale) && <OnSaleBadge />}
+                        {(isProduct(product) && product.on_sale) && <OnSaleBadge/>}
 
                         {product.images && product.images.length > 0 ? (
                             <Image
@@ -76,7 +78,7 @@ export default async function ProductPage({params}: ProductPageProps) {
                 <div className={"flex flex-col gap-2 w-full md:w-3/5 px-4"}>
 
 
-                    <ProductCategoriesLinks categories={product.categories} className={""} />
+                    <ProductCategoriesLinks categories={product.categories} className={""}/>
 
                     <div className="flex flex-col md:flex-row flex-wrap justify-between items-center gap-2 my-3">
 
@@ -84,15 +86,15 @@ export default async function ProductPage({params}: ProductPageProps) {
                         <h1 className="text-xl font-bold">{product.name}</h1>
 
                         {/* PRICE */}
-                        <ProductPrice product={product} className={"text-lg"} />
+                        <ProductPrice product={product} className={"text-lg"}/>
                     </div>
 
                     {/* DESCRIPTION */}
                     <div className="prose max-w-none text-gray-700 description mb-4"
-                        dangerouslySetInnerHTML={{__html: product.description}}
+                         dangerouslySetInnerHTML={{__html: product.description}}
                     />
 
-                    <ProductGroupedProducts products={groupedProducts} />
+                    <ProductGroupedProducts products={groupedProducts}/>
 
                     {/* ADD TO CART (if needed later) */}
                     <button
