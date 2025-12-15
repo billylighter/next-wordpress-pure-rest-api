@@ -1,8 +1,5 @@
 "use server";
 
-
-
-import getProductBySlug from "@/lib/api/getProductBySlug";
 import Image from "next/image";
 import StockImage from "../../../../public/woocommerce-placeholder.webp";
 import {IoIosCart} from "react-icons/io";
@@ -16,6 +13,7 @@ import {isProduct} from "@/utils/CheckEntyties";
 import OnSaleBadge from "@/components/single-product/OnSaleBadge";
 import React from "react";
 import ProductPrice from "@/components/single-product/ProductPrice";
+import {getAllProducts} from "@/lib/api/woocommerce/getAllProducts";
 
 interface ProductPageProps {
     params: {
@@ -26,7 +24,8 @@ interface ProductPageProps {
 export default async function ProductPage({params}: ProductPageProps) {
     const {slug} = await params;
 
-    const product = await getProductBySlug(slug);
+    const productFind = await getAllProducts({slug: slug});
+    const product = productFind[0];
 
     if (!product) return notFound();
 
