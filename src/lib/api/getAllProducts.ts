@@ -1,21 +1,31 @@
-import { WC_BASE_URL } from "../woocommerce/config";
+import {WC_BASE_URL, WC_TOKEN} from "../woocommerce/config";
 import Product from "@/types/Product";
+import buildSearchParams from "@/utils/buildSearchParams";
+import WooRequestProps from "@/types/api/woocommerce/WooRequestProps";
 
-export async function getAllProducts(): Promise<Product[]> {
+export async function getAllProducts(params: WooRequestProps = {}): Promise<Product[]> {
 
-    const url = `${WC_BASE_URL}/products?per_page=100`;
+    try {
+        const endpoint = new URL(`${WC_BASE_URL}/products`);
 
-    const token = Buffer
-        .from(`${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`)
-        .toString("base64");
+        buildSearchParams(endpoint, params);
 
-    const res = await fetch(url, {
-        method: "GET",
-        headers: {
-            Authorization: `Basic ${token}`,
-        },
-        next: { revalidate: 3600 },
-    });
+        const response = await fetch(endpoint, {
+            method: "GET",
+            headers: {
+                Authorization: `Basic ${WC_TOKEN}`,
+            },
+            next: {revalidate: 3600},
+        });
 
-    return await res.json();
+        return (await response.json()) as Product[];
+
+    } catch (error) {
+
+        console.error("Error in getAllProducts:", error);
+
+        return [];
+
+    }
+
 }

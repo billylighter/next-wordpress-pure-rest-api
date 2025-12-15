@@ -16,8 +16,6 @@ interface CardProps {
 
 export default function Card({item, children}: CardProps) {
 
-    console.log(item)
-
     const itemPath = isProduct(item) ? `/product/${item.slug}` : `/product-category/${item.slug}`;
 
     return (

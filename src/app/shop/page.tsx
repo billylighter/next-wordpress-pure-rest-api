@@ -13,7 +13,6 @@ export default async function ShopPage({params}: PageProps) {
 
     const products = await getAllProducts();
 
-
     return (
         <>
 
