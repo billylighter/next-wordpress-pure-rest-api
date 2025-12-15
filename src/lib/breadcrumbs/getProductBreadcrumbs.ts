@@ -1,4 +1,4 @@
-import { WooProduct } from "@/types/woocommerce";
+import Product from "@/types/Product";
 
 import { pickPrimaryCategory } from "./pickPrimaryCategory";
 import { buildCategoryChain } from "./categoryTree";
@@ -10,7 +10,7 @@ export interface BreadcrumbItem {
 }
 
 export async function getProductBreadcrumbs(
-    product: WooProduct
+    product: Product
 ): Promise<BreadcrumbItem[]> {
     const allCategories = await getAllCategories();
 

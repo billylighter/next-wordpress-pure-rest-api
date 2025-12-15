@@ -1,42 +1,30 @@
-import { WooCategory } from "@/types/woocommerce";
-import { WC_BASE_URL } from "../woocommerce/config";
+import {WC_BASE_URL, WC_TOKEN} from "../woocommerce/config";
+import ProductCategory from "@/types/ProductCategory";
+import WooRequestProps from "@/types/api/woocommerce/WooRequestProps";
+import buildSearchParams from "@/utils/buildSearchParams";
 
-export async function getAllCategories(
-    params: Record<string, string | number | boolean> = {}
-): Promise<WooCategory[]> {
+export async function getAllCategories(params : WooRequestProps): Promise<ProductCategory[]> {
     try {
-        const url = new URL(`${WC_BASE_URL}/products/categories`);
 
-        url.searchParams.set("per_page", "100");
+        const endpoint = new URL(`${WC_BASE_URL}/products/categories`);
 
-        Object.entries(params).forEach(([key, value]) => {
-            if (typeof value === "boolean") {
-                url.searchParams.set(key, value ? "1" : "0");
-            } else {
-                url.searchParams.set(key, value.toString());
-            }
-        });
+        buildSearchParams(endpoint, params);
 
-        const token = Buffer.from(
-            `${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`
-        ).toString("base64");
-
-        const res = await fetch(url.toString(), {
-            method: "GET",
+        const response = await fetch(endpoint.toString(), {
             headers: {
-                Authorization: `Basic ${token}`,
+                Authorization: `Basic ${WC_TOKEN}`,
             },
             next: { revalidate: 3600 },
         });
 
-        if (!res.ok) {
-            const text = await res.text();
+        if (!response.ok) {
+            const text = await response.text();
             throw new Error(
-                `Failed to fetch WooCommerce categories: ${res.status} ${text}`
+                `Failed to fetch WooCommerce categories: ${response.status} ${text}`
             );
         }
 
-        return (await res.json()) as WooCategory[];
+        return (await response.json()) as ProductCategory[];
     } catch (error) {
         console.error("Error in getAllCategories:", error);
         return [];

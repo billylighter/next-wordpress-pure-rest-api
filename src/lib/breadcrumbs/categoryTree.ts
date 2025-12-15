@@ -1,11 +1,11 @@
-import { WooCategory } from "@/types/woocommerce";
+import ProductCategory from "@/types/ProductCategory";
 
 export function buildCategoryChain(
-    category: WooCategory,
-    categoryMap: Map<number, WooCategory>
-): WooCategory[] {
-    const chain: WooCategory[] = [];
-    let current: WooCategory | undefined = category;
+    category: ProductCategory,
+    categoryMap: Map<number, ProductCategory>
+): ProductCategory[] {
+    const chain: ProductCategory[] = [];
+    let current: ProductCategory | undefined = category;
 
     while (current) {
         chain.push(current);

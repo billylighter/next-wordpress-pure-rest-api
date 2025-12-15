@@ -1,4 +1,4 @@
-import { WooCategory } from "@/types/woocommerce";
+import ProductCategory from "@/types/ProductCategory";
 
 /**
  * Strategy:
@@ -6,8 +6,8 @@ import { WooCategory } from "@/types/woocommerce";
  * - fallback to first
  */
 export function pickPrimaryCategory(
-    categories: WooCategory[]
-): WooCategory {
+    categories: ProductCategory[]
+): ProductCategory {
     return categories.sort(
         (a, b) => b.parent - a.parent
     )[0];

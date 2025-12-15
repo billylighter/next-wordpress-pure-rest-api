@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, {JSX} from "react";
 import ProductCategory from "@/types/ProductCategory";
 import Product from "@/types/Product";
-import {isProduct} from "@/app/utils/CheckEntyties";
+import {isProduct} from "@/utils/CheckEntyties";
 import {IoIosArrowRoundForward} from "react-icons/io";
 import OnSaleBadge from "@/components/single-product/OnSaleBadge";
 import ProductPrice from "@/components/single-product/ProductPrice";

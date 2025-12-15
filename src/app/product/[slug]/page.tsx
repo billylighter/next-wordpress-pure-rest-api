@@ -12,7 +12,7 @@ import ProductGroupedProducts from "@/components/single-product/ProductGroupedPr
 import {getProductBreadcrumbs} from "@/lib/breadcrumbs/getProductBreadcrumbs";
 import {notFound} from "next/navigation";
 import Breadcrumbs from "@/ui/Breadcrumbs";
-import {isProduct} from "@/app/utils/CheckEntyties";
+import {isProduct} from "@/utils/CheckEntyties";
 import OnSaleBadge from "@/components/single-product/OnSaleBadge";
 import React from "react";
 import ProductPrice from "@/components/single-product/ProductPrice";
