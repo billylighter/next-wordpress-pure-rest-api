@@ -2,7 +2,7 @@ import Product from "@/types/Product";
 
 import { pickPrimaryCategory } from "./pickPrimaryCategory";
 import { buildCategoryChain } from "./categoryTree";
-import {getAllCategories} from "@/lib/api/getAllCategories";
+import {getAllCategories} from "@/lib/api/woocommerce/getAllCategories";
 
 export interface BreadcrumbItem {
     label: string;

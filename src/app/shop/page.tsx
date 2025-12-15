@@ -1,5 +1,5 @@
 import React, {Suspense} from "react";
-import {getAllProducts} from "@/lib/api/getAllProducts";
+import {getAllProducts} from "@/lib/api/woocommerce/getAllProducts";
 import ProductCategories from "@/components/shop/ProductsGrid";
 import ProductsGrid from "@/components/shop/ProductsGrid";
 

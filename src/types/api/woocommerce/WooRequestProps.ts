@@ -1,5 +1,6 @@
 export default interface WooRequestProps {
     hide_empty?: boolean,
     parent?: number,
-    per_page?: number
+    per_page?: number,
+    slug?: string
 }

@@ -1,10 +1,8 @@
 import React, {Suspense} from "react";
-import getCategoryBySlug from "@/lib/api/getCategoryBySlug";
 import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
 import {notFound} from "next/navigation";
 import CategoriesGrid from "@/components/categories/CategoriesGrid";
-import {getAllCategories} from "@/lib/api/getAllCategories";
-
+import {getAllCategories} from "@/lib/api/woocommerce/getAllCategories";
 
 interface PageProps {
     params: {
@@ -14,7 +12,8 @@ interface PageProps {
 
 export default async function CategoryPage({params}: PageProps) {
     const {slug} = await params;
-    const category = await getCategoryBySlug(String(slug.at(-1)));
+    const findCategory = await getAllCategories({slug: String(slug.at(-1))});
+    const category = findCategory[0];
 
     if(!category) return notFound();
     const categoryChildren = await getAllCategories({ hide_empty: true,  parent: category.id})

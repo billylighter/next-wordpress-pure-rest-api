@@ -1,4 +1,4 @@
-import {WC_BASE_URL, WC_TOKEN} from "../woocommerce/config";
+import {WC_BASE_URL, WC_TOKEN} from "../../woocommerce/config";
 import Product from "@/types/Product";
 import buildSearchParams from "@/utils/buildSearchParams";
 import WooRequestProps from "@/types/api/woocommerce/WooRequestProps";
