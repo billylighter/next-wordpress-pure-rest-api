@@ -1,10 +1,9 @@
 import React, {Suspense} from "react";
 import getCategoryBySlug from "@/lib/api/getCategoryBySlug";
 import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
-import ProductCategories from "@/components/shop/ProductsGrid";
 import {notFound} from "next/navigation";
-import getChildCategoriesBySlug from "@/lib/api/getChildCategories";
 import CategoriesGrid from "@/components/categories/CategoriesGrid";
+import {getAllCategories} from "@/lib/api/getAllCategories";
 
 
 interface PageProps {
@@ -18,17 +17,13 @@ export default async function CategoryPage({params}: PageProps) {
     const category = await getCategoryBySlug(String(slug.at(-1)));
 
     if(!category) return notFound();
-    const categoryChildren = await getChildCategoriesBySlug(category, {hide_empty: true});
+    const categoryChildren = await getAllCategories({ hide_empty: true,  parent: category.id})
 
     if(!categoryChildren) return notFound();
 
     const data = categoryChildren.length !== 0
-        ? await getChildCategoriesBySlug(category, { hide_empty: true })
+        ? await getAllCategories({ hide_empty: true,  parent: category.id})
         : await getProductsByCategoryId(category.id, { hide_empty: true });
-
-
-
-    console.log(categoryChildren.length)
 
     return (
         <div>
