@@ -1,5 +1,4 @@
 import React, {Suspense} from "react";
-import getProductsByCategoryId from "@/lib/api/getProductsByCategoryId";
 import {notFound} from "next/navigation";
 import CategoriesGrid from "@/components/categories/CategoriesGrid";
 import {getAllCategories} from "@/lib/api/woocommerce/getAllCategories";
