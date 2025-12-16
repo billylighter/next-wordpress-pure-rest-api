@@ -11,7 +11,7 @@ interface PageProps {
 
 export default async function ShopPage({params}: PageProps) {
 
-    const products = await getAllProducts();
+    const products = await getAllProducts({per_page: 20});
 
     return (
         <>
