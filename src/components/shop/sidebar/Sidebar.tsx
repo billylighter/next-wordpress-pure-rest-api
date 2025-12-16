@@ -1,22 +1,35 @@
-import React from "react";
+// components/shop/sidebar/Sidebar.tsx
 import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
 import buildCategoryTree from "@/utils/buildCategoryTree";
-import SidebarCategoryFilter from "@/components/shop/sidebar/SidebarCategoryFilter";
-import SidebarSearch from "@/components/shop/sidebar/SidebarSearch";
+import CategoryTree from "@/types/CategoryTree";
+import SidebarFilters from "@/components/shop/sidebar/SidebarFilters";
 
-interface SidebarProps {
-    className?: string
+interface Props {
+    className?: string;
+    initialSearch: string;
+    initialCategories: number[];
 }
 
-export default async function Sidebar({className}: SidebarProps) {
+// function SidebarFilters(props: { categories: CategoryTree[], initialSearch: string, initialCategories: number[] }) {
+//     return null;
+// }
 
-    const categories = await getAllCategories({per_page: 100});
-    const categoriesTree = buildCategoryTree(categories);
+export default async function Sidebar({
+                                          className,
+                                          initialSearch,
+                                          initialCategories,
+                                      }: Props) {
+
+    const categories = await getAllCategories({ per_page: 100 });
+    const tree = buildCategoryTree(categories);
 
     return (
         <aside className={className}>
-            <SidebarSearch />
-            <SidebarCategoryFilter categories={categoriesTree} />
+            <SidebarFilters
+                categories={tree}
+                initialSearch={initialSearch}
+                initialCategories={initialCategories}
+            />
         </aside>
-    )
+    );
 }

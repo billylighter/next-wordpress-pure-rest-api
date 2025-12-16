@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import CategoryFilter from "@/components/shop/sidebar/CategoryFilter";
-import CategoryTree  from "@/types/CategoryTree";
+import CategoryTree from "@/types/CategoryTree";
 
 interface Props {
     categories: CategoryTree[];
+    selectedIds: number[];
+    onChange: (ids: number[]) => void;
 }
 
-export default function SidebarCategoryFilter({ categories }: Props) {
-    const [selectedIds, setSelectedIds] = useState<number[]>([]);
-
-    const handleChange = (ids: number[]) => {
-        setSelectedIds(ids);
-    };
+export default function SidebarCategoryFilter({
+                                                  categories,
+                                                  selectedIds,
+                                                  onChange,
+                                              }: Props) {
 
     return (
         <div>
@@ -22,7 +22,7 @@ export default function SidebarCategoryFilter({ categories }: Props) {
             <CategoryFilter
                 categories={categories}
                 selectedIds={selectedIds}
-                onChange={handleChange}
+                onChange={onChange}
             />
         </div>
     );

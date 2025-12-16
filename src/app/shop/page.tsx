@@ -1,36 +1,52 @@
-import React, {Suspense} from "react";
+// app/shop/page.tsx
 import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
-import ProductsGrid from "@/components/shop/ProductsGrid";
 import Sidebar from "@/components/shop/sidebar/Sidebar";
+import ProductsGrid from "@/components/shop/ProductsGrid";
 
 interface PageProps {
-    params: {
-        slug: string[];
-    };
+    searchParams: Promise<{
+        search?: string;
+        categories?: string;
+        per_page?: string;
+    }>;
 }
 
-export default async function ShopPage({params}: PageProps) {
+export default async function ShopPage({ searchParams }: PageProps) {
 
-    const products = await getAllProducts({per_page: 20});
+    const params = await searchParams;
+
+    const search = params.search ?? "";
+    const categoryIds = params.categories
+        ? params.categories.split(",").map(Number)
+        : [];
+
+    const perPage = Number(params.per_page ?? 20);
+
+    const products = await getAllProducts({
+        per_page: perPage,
+        search,
+        category: categoryIds.length
+            ? categoryIds.join(",")
+            : undefined,
+    });
 
     return (
         <>
-
-            <header className="text-center mt-4 mb-6">
-                <h1 className="text-xl font-semibold">Shop</h1>
+            <header className="text-center mt-6 mb-8">
+                <h1 className="text-2xl font-semibold">Shop</h1>
             </header>
 
-            <div className="flex flex-col lg:flex-row lg:gap-12 gap-6">
-
-                <Sidebar className={"w-full lg:w-1/5"}/>
+            <div className="flex flex-col lg:flex-row gap-8">
+                <Sidebar
+                    className="w-full lg:w-1/5"
+                    initialSearch={search}
+                    initialCategories={categoryIds}
+                />
 
                 <main className="w-full lg:w-4/5">
-                    <ProductsGrid products={products}/>
+                    <ProductsGrid products={products} />
                 </main>
-
             </div>
-
-
         </>
     );
 }
