@@ -24,7 +24,7 @@ export default async function ShopPage({ searchParams }: PageProps) {
 
     const products = await getAllProducts({
         per_page: perPage,
-        search,
+        search : search,
         category: categoryIds.length
             ? categoryIds.join(",")
             : undefined,

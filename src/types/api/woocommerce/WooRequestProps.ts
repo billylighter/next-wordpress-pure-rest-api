@@ -4,5 +4,7 @@ export default interface WooRequestProps {
     per_page?: number,
     slug?: string,
     category?: string | number,
+    tag?: string | number,
     include?: string,
+    search?:string,
 }
