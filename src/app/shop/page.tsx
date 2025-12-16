@@ -16,11 +16,11 @@ export default async function ShopPage({params}: PageProps) {
     return (
         <>
 
-            <header className="text-center my-4">
+            <header className="text-center mt-4 mb-6">
                 <h1 className="text-xl font-semibold">Shop</h1>
             </header>
 
-            <div className="flex flex-col lg:flex-row gap-6">
+            <div className="flex flex-col lg:flex-row lg:gap-12 gap-6">
 
                 <Sidebar className={"w-full lg:w-1/5"}/>
 
