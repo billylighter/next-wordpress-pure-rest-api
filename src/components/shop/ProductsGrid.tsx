@@ -13,7 +13,7 @@ export default function ProductsGrid({products}: ParentCategoriesProps) {
             {products.length === 0 ? (
                 <p>No products found.</p>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {products.map((product: Product) => (
                         <Card item={product} key={product.id}>
                             <div className={"description text-xs leading-3"}

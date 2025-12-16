@@ -26,7 +26,7 @@ export default async function CategoryPage({params}: PageProps) {
 
     return (
         <div>
-            <header className="text-center my-4">
+            <header className="max-w-4xl mx-auto text-center my-4">
                 <h1 className="text-xl font-semibold">{category.name}</h1>
                 {category.description && (
                     <p className="text-gray-500 italic mt-2">{category.description}</p>

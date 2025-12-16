@@ -20,7 +20,18 @@ export default async function ShopPage({params}: PageProps) {
                 <h1 className="text-xl font-semibold">Shop</h1>
             </header>
 
-            <ProductsGrid products={products}/>
+            <div className="flex flex-col lg:flex-row gap-6">
+
+                <aside className="w-full lg:w-1/5">
+                    Sidebar
+                </aside>
+
+                <main className="w-full lg:w-4/5">
+                    <ProductsGrid products={products}/>
+                </main>
+
+            </div>
+
 
         </>
     );

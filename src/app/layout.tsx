@@ -31,7 +31,7 @@ export default function RootLayout(
 
         <Navbar />
 
-        <div className="max-w-4xl mx-auto p-4">
+        <div className="max-w-[1440px] mx-auto p-4">
 
             <NextTopLoader color={"black"} showSpinner={false}/>
 

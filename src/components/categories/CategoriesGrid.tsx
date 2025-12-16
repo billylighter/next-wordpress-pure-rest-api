@@ -13,7 +13,7 @@ export default function CategoriesGrid({data}: ParentCategoriesProps) {
             {data.length === 0 ? (
                 <p>No categories found.</p>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {data.map((cat: ProductCategory | Product) => (
                         <Card item={cat} key={cat.id}/>
                     ))}
