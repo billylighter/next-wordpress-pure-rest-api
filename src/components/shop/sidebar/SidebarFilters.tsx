@@ -1,22 +1,29 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useState} from "react";
 import SidebarSearch from "./SidebarSearch";
 import SidebarCategoryFilter from "./SidebarCategoryFilter";
+import SidebarTagFilter from "./SidebarTagFilter";
 import CategoryTree from "@/types/CategoryTree";
+import ProductTag from "@/types/ProductTag";
 
 interface Props {
     categories: CategoryTree[];
+    tags: ProductTag[];
     initialSearch: string;
     initialCategories: number[];
+    initialTags: number[];
 }
 
-export default function SidebarFilters({
-                                           categories,
-                                           initialSearch,
-                                           initialCategories,
-                                       }: Props) {
+export default function SidebarFilters(
+    {
+        categories,
+        tags,
+        initialSearch,
+        initialCategories,
+        initialTags,
+    }: Props) {
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -24,14 +31,19 @@ export default function SidebarFilters({
     const [search, setSearch] = useState(initialSearch);
     const [selectedCategories, setSelectedCategories] =
         useState<number[]>(initialCategories);
+    const [selectedTags, setSelectedTags] =
+        useState<number[]>(initialTags);
 
     const applyFilters = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const params = new URLSearchParams(searchParams.toString());
 
-        if (search) {
-            params.set("search", search);
+        // reset pagination on filter change
+        params.delete("page");
+
+        if (search.trim()) {
+            params.set("search", search.trim());
         } else {
             params.delete("search");
         }
@@ -43,6 +55,15 @@ export default function SidebarFilters({
             );
         } else {
             params.delete("categories");
+        }
+
+        if (selectedTags.length) {
+            params.set(
+                "tags",
+                [...selectedTags].sort().join(",")
+            );
+        } else {
+            params.delete("tags");
         }
 
         router.push(`/shop?${params.toString()}`);
@@ -59,6 +80,12 @@ export default function SidebarFilters({
                 categories={categories}
                 selectedIds={selectedCategories}
                 onChange={setSelectedCategories}
+            />
+
+            <SidebarTagFilter
+                tags={tags}
+                selectedIds={selectedTags}
+                onChange={setSelectedTags}
             />
 
             <button
