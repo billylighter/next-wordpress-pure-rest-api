@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
-import {getAllProducts} from "@/lib/api/woocommerce/getAllProducts";
-import ProductCategories from "@/components/shop/ProductsGrid";
+import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
 import ProductsGrid from "@/components/shop/ProductsGrid";
+import Sidebar from "@/components/shop/sidebar/Sidebar";
 
 interface PageProps {
     params: {
@@ -22,9 +22,7 @@ export default async function ShopPage({params}: PageProps) {
 
             <div className="flex flex-col lg:flex-row gap-6">
 
-                <aside className="w-full lg:w-1/5">
-                    Sidebar
-                </aside>
+                <Sidebar className={"w-full lg:w-1/5"}/>
 
                 <main className="w-full lg:w-4/5">
                     <ProductsGrid products={products}/>

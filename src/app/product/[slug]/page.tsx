@@ -12,7 +12,7 @@ import {isProduct} from "@/utils/CheckEntyties";
 import OnSaleBadge from "@/components/single-product/OnSaleBadge";
 import React from "react";
 import ProductPrice from "@/components/single-product/ProductPrice";
-import {getAllProducts} from "@/lib/api/woocommerce/getAllProducts";
+import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
 
 interface ProductPageProps {
     params: {

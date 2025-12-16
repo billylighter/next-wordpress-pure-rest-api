@@ -3,7 +3,7 @@ import Product from "@/types/Product";
 import buildSearchParams from "@/utils/buildSearchParams";
 import WooRequestProps from "@/types/api/woocommerce/WooRequestProps";
 
-export async function getAllProducts(params: WooRequestProps = {}): Promise<Product[]> {
+export default async function getAllProducts(params: WooRequestProps = {}): Promise<Product[]> {
 
     try {
         const endpoint = new URL(`${WC_BASE_URL}/products`);

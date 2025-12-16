@@ -1,8 +1,8 @@
 import React, {Suspense} from "react";
 import {notFound} from "next/navigation";
 import CategoriesGrid from "@/components/categories/CategoriesGrid";
-import {getAllCategories} from "@/lib/api/woocommerce/getAllCategories";
-import {getAllProducts} from "@/lib/api/woocommerce/getAllProducts";
+import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
+import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
 
 interface PageProps {
     params: {

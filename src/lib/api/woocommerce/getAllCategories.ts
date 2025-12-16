@@ -3,7 +3,7 @@ import ProductCategory from "@/types/ProductCategory";
 import WooRequestProps from "@/types/api/woocommerce/WooRequestProps";
 import buildSearchParams from "@/utils/buildSearchParams";
 
-export async function getAllCategories(params: WooRequestProps = {}): Promise<ProductCategory[]> {
+export default async function getAllCategories(params: WooRequestProps = {}): Promise<ProductCategory[]> {
     try {
 
         const endpoint = new URL(`${WC_BASE_URL}/products/categories`);
