@@ -6,7 +6,12 @@ import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
 import getAllTags from "@/lib/api/woocommerce/getAllTags";
 import buildCategoryTree from "@/utils/buildCategoryTree";
 
-export default async function ShopPage({ searchParams }) {
+interface ShopPageProps {
+    searchParams: Record<string, string | undefined>;
+}
+
+
+export default async function ShopPage({ searchParams } : ShopPageProps) {
 
     const params = await searchParams;
 
