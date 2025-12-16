@@ -35,6 +35,8 @@ export default async function ProductPage({params}: ProductPageProps) {
             {include: product.grouped_products.join(',')}
         ) : [];
 
+    const sortedCategories = [...product.categories].sort((a, b) => a.id - b.id);
+
     return (
         <div className="container mx-auto">
 
@@ -78,7 +80,7 @@ export default async function ProductPage({params}: ProductPageProps) {
                 <div className={"flex flex-col gap-2 w-full md:w-3/5 px-4"}>
 
 
-                    <ProductCategoriesLinks categories={product.categories} className={""}/>
+                    <ProductCategoriesLinks categories={sortedCategories} className={"me-1 mb-1"}/>
 
                     <div className="flex flex-col md:flex-row flex-wrap justify-between items-center gap-2 my-3">
 

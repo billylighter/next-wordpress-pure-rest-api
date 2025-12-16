@@ -15,7 +15,7 @@ export async function getAllProducts(params: WooRequestProps = {}): Promise<Prod
             headers: {
                 Authorization: `Basic ${WC_TOKEN}`,
             },
-            next: {revalidate: 3600},
+            next: {revalidate: 0},
         });
 
         return (await response.json()) as Product[];
