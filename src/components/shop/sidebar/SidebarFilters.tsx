@@ -7,6 +7,7 @@ import SidebarCategoryFilter from "./SidebarCategoryFilter";
 import SidebarTagFilter from "./SidebarTagFilter";
 import CategoryTree from "@/types/CategoryTree";
 import ProductTag from "@/types/ProductTag";
+import {RiResetRightLine} from "react-icons/ri";
 
 interface Props {
     categories: CategoryTree[];
@@ -69,31 +70,44 @@ export default function SidebarFilters(
         router.push(`/shop?${params.toString()}`);
     };
 
+    const resetFilters = () => {
+        setSearch("");
+        setSelectedCategories([]);
+        setSelectedTags([]);
+
+        router.push(`/shop`);
+    }
+
     return (
-        <form onSubmit={applyFilters} className="space-y-6">
-            <SidebarSearch
-                value={search}
-                onChange={setSearch}
-            />
+       <>
+           <form onSubmit={applyFilters} className="space-y-6">
+               <SidebarSearch
+                   value={search}
+                   onChange={setSearch}
+               />
 
-            <SidebarCategoryFilter
-                categories={categories}
-                selectedIds={selectedCategories}
-                onChange={setSelectedCategories}
-            />
+               <SidebarCategoryFilter
+                   categories={categories}
+                   selectedIds={selectedCategories}
+                   onChange={setSelectedCategories}
+               />
 
-            <SidebarTagFilter
-                tags={tags}
-                selectedIds={selectedTags}
-                onChange={setSelectedTags}
-            />
+               <SidebarTagFilter
+                   tags={tags}
+                   selectedIds={selectedTags}
+                   onChange={setSelectedTags}
+               />
 
-            <button
-                type="submit"
-                className="w-full bg-black text-white py-2 rounded-md"
-            >
-                Apply filters
-            </button>
-        </form>
+               <button type="submit"
+                       className="w-full bg-gray-900 hover:bg-gray-700 text-white py-2 rounded cursor-pointer">
+                   Apply filters
+               </button>
+           </form>
+
+           <button onClick={resetFilters} className={"mt-2 inline-flex justify-center items-center w-full bg-gray-900 hover:bg-gray-700 text-white py-2 rounded cursor-pointer"}>
+               <RiResetRightLine className={"me-2"} />
+               Reset filters
+           </button>
+       </>
     );
 }
