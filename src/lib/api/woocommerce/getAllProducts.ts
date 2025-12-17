@@ -15,7 +15,7 @@ export default async function getAllProducts(params: WooRequestProps = {}): Prom
             headers: {
                 Authorization: `Basic ${WC_TOKEN}`,
             },
-            next: {revalidate: 0},
+            next: {revalidate: 3600},
         });
 
         return (await response.json()) as Product[];

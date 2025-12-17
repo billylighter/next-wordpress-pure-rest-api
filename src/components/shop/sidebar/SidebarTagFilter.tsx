@@ -37,7 +37,7 @@ export default function SidebarTagFilter({
                             type="button"
                             onClick={() => toggle(tag.id)}
                             className={clsx(
-                                "px-3 py-1 rounded-full border text-sm transition",
+                                "px-3 py-1 rounded-full border text-sm transition cursor-pointer",
                                 active
                                     ? "bg-black text-white border-black"
                                     : "bg-white text-black border-gray-300 hover:bg-gray-100"

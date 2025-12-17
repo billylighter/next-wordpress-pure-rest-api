@@ -8,6 +8,7 @@ import SidebarTagFilter from "./SidebarTagFilter";
 import CategoryTree from "@/types/CategoryTree";
 import ProductTag from "@/types/ProductTag";
 import {RiResetRightLine} from "react-icons/ri";
+import NProgress from "nprogress";
 
 interface SidebarFiltersProps {
     categories: CategoryTree[];
@@ -35,7 +36,7 @@ export default function SidebarFilters(
 
     const applyFilters = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        NProgress.start();
         const params = new URLSearchParams(searchParams.toString());
 
         params.delete("page");
@@ -65,6 +66,9 @@ export default function SidebarFilters(
         }
 
         router.push(`/shop?${params.toString()}`);
+        setTimeout(() => {
+            NProgress.done();
+        }, 300);
     };
 
     const hasActiveFilters = (() => {
@@ -79,10 +83,16 @@ export default function SidebarFilters(
     })();
 
     const resetFilters = () => {
+        NProgress.start();
+
         setSearch("");
         setSelectedCategories([]);
         setSelectedTags([]);
         router.push(`/shop`);
+
+        setTimeout(() => {
+            NProgress.done();
+        }, 300);
     }
 
     return (
