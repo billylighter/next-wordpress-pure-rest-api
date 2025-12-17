@@ -5,7 +5,7 @@ import StockImage from "../../../../public/woocommerce-placeholder.webp";
 import {IoIosCart} from "react-icons/io";
 import ProductCategoriesLinks from "@/components/single-product/ProductCategoriesLinks";
 import ProductGroupedProducts from "@/components/single-product/ProductGroupedProducts.jsx";
-import {getProductBreadcrumbs} from "@/lib/breadcrumbs/getProductBreadcrumbs";
+import getProductBreadcrumbs from "@/lib/breadcrumbs/getProductBreadcrumbs";
 import {notFound} from "next/navigation";
 import Breadcrumbs from "@/ui/Breadcrumbs";
 import {isProduct} from "@/utils/CheckEntyties";
@@ -29,6 +29,8 @@ export default async function ProductPage({params}: ProductPageProps) {
     if (!product) return notFound();
 
     const breadcrumbs = await getProductBreadcrumbs(product);
+
+    console.log(breadcrumbs)
 
     const groupedProducts =
         (product.grouped_products.length !== 0) ? await getAllProducts(

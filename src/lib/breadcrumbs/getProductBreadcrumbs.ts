@@ -1,15 +1,14 @@
 import Product from "@/types/Product";
-
-import { pickPrimaryCategory } from "./pickPrimaryCategory";
-import { buildCategoryChain } from "./categoryTree";
 import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
+import getDeepestCategoryChain from "@/utils/getDeepestCategoryChain";
+
 
 export interface BreadcrumbItem {
     label: string;
     href: string;
 }
 
-export async function getProductBreadcrumbs(
+export default async function getProductBreadcrumbs(
     product: Product
 ): Promise<BreadcrumbItem[]> {
     const allCategories = await getAllCategories();
@@ -18,18 +17,16 @@ export async function getProductBreadcrumbs(
         allCategories.map(cat => [cat.id, cat])
     );
 
-    const primaryCategory = pickPrimaryCategory(product.categories);
-    const fullCategory = categoryMap.get(primaryCategory.id);
-
-    const categoryChain = fullCategory
-        ? buildCategoryChain(fullCategory, categoryMap)
-        : [];
+    const categoryChain = getDeepestCategoryChain(
+        product.categories,
+        categoryMap
+    );
 
     return [
         { label: "Home", href: "/" },
         ...categoryChain.map(cat => ({
             label: cat.name,
-            href: `/product-category/${cat.slug}`
+            href: `/product-category/${cat.slug}` // adjust to your route
         })),
         {
             label: product.name,

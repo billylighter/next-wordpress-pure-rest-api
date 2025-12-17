@@ -1,6 +1,6 @@
 import ProductCategory from "@/types/ProductCategory";
 
-export function buildCategoryChain(
+export default function buildCategoryChain(
     category: ProductCategory,
     categoryMap: Map<number, ProductCategory>
 ): ProductCategory[] {
@@ -16,3 +16,4 @@ export function buildCategoryChain(
 
     return chain.reverse();
 }
+
