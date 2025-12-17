@@ -9,7 +9,7 @@ import CategoryTree from "@/types/CategoryTree";
 import ProductTag from "@/types/ProductTag";
 import {RiResetRightLine} from "react-icons/ri";
 
-interface Props {
+interface SidebarFiltersProps {
     categories: CategoryTree[];
     tags: ProductTag[];
     initialSearch: string;
@@ -24,23 +24,20 @@ export default function SidebarFilters(
         initialSearch,
         initialCategories,
         initialTags,
-    }: Props) {
+    }: SidebarFiltersProps) {
 
     const router = useRouter();
     const searchParams = useSearchParams();
 
     const [search, setSearch] = useState(initialSearch);
-    const [selectedCategories, setSelectedCategories] =
-        useState<number[]>(initialCategories);
-    const [selectedTags, setSelectedTags] =
-        useState<number[]>(initialTags);
+    const [selectedCategories, setSelectedCategories] = useState<number[]>(initialCategories);
+    const [selectedTags, setSelectedTags] = useState<number[]>(initialTags);
 
     const applyFilters = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const params = new URLSearchParams(searchParams.toString());
 
-        // reset pagination on filter change
         params.delete("page");
 
         if (search.trim()) {
@@ -70,44 +67,55 @@ export default function SidebarFilters(
         router.push(`/shop?${params.toString()}`);
     };
 
+    const hasActiveFilters = (() => {
+        if (!searchParams) return false;
+
+        const filterKeys = ["search", "categories", "tags"];
+
+        return filterKeys.some((key) => {
+            const value = searchParams.get(key);
+            return value !== null && value !== "";
+        });
+    })();
+
     const resetFilters = () => {
         setSearch("");
         setSelectedCategories([]);
         setSelectedTags([]);
-
         router.push(`/shop`);
     }
 
     return (
-       <>
-           <form onSubmit={applyFilters} className="space-y-6">
-               <SidebarSearch
-                   value={search}
-                   onChange={setSearch}
-               />
+        <>
+            <form onSubmit={applyFilters} className="space-y-6">
+                <SidebarSearch
+                    value={search}
+                    onChange={setSearch}/>
 
-               <SidebarCategoryFilter
-                   categories={categories}
-                   selectedIds={selectedCategories}
-                   onChange={setSelectedCategories}
-               />
+                <SidebarCategoryFilter
+                    categories={categories}
+                    selectedIds={selectedCategories}
+                    onChange={setSelectedCategories}/>
 
-               <SidebarTagFilter
-                   tags={tags}
-                   selectedIds={selectedTags}
-                   onChange={setSelectedTags}
-               />
+                <SidebarTagFilter
+                    tags={tags}
+                    selectedIds={selectedTags}
+                    onChange={setSelectedTags}/>
 
-               <button type="submit"
-                       className="w-full bg-gray-900 hover:bg-gray-700 text-white py-2 rounded cursor-pointer">
-                   Apply filters
-               </button>
-           </form>
+                <button type="submit"
+                        className="w-full bg-gray-900 hover:bg-gray-700 text-white py-2 rounded cursor-pointer">
+                    Apply filters
+                </button>
+            </form>
 
-           <button onClick={resetFilters} className={"mt-2 inline-flex justify-center items-center w-full bg-gray-900 hover:bg-gray-700 text-white py-2 rounded cursor-pointer"}>
-               <RiResetRightLine className={"me-2"} />
-               Reset filters
-           </button>
-       </>
+            {hasActiveFilters && (
+                <button onClick={resetFilters}
+                        className="mt-2 inline-flex justify-center items-center w-full bg-amber-600 hover:bg-amber-500 text-white py-2 rounded cursor-pointer">
+                    <RiResetRightLine className="me-2"/>
+                    Reset filters
+                </button>
+            )}
+
+        </>
     );
 }

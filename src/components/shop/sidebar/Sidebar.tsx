@@ -27,8 +27,6 @@ export default async function Sidebar(
     const tags = await getAllTags();
     const tree = buildCategoryTree(categories);
 
-    console.log(tags);
-
     return (
         <aside className={className}>
             <SidebarFilters
