@@ -1,7 +1,6 @@
 import Product from "@/types/Product";
 import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
-import getDeepestCategoryChain from "@/utils/getDeepestCategoryChain";
-
+import getDeepestCategoryChain from "@/lib/breadcrumbs/getDeepestCategoryChain";
 
 export interface BreadcrumbItem {
     label: string;

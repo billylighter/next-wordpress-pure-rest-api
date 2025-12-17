@@ -31,13 +31,11 @@ export default function CategoryFilter({
         );
     };
 
-    const renderTree = (nodes: CategoryTree[], level = 0) => (
+    const   renderTree = (nodes: CategoryTree[], level = 0) => (
         <ul className="space-y-2">
             {nodes.map((node) => (
-                <li
-                    key={node.id}
-                    className={INDENT_BY_LEVEL[level] ?? "pl-12"}
-                >
+                <li key={node.id}
+                    className={"pl-2"}>
                     <label className="flex items-center justify-start gap-2 cursor-pointer">
                         <input
                             type="checkbox"

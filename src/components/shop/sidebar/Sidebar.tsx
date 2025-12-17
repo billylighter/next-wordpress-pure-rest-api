@@ -1,5 +1,5 @@
 import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
-import buildCategoryTree from "@/utils/buildCategoryTree";
+import buildCategoryTree from "@/lib/breadcrumbs/buildCategoryTree";
 import CategoryTree from "@/types/CategoryTree";
 import SidebarFilters from "@/components/shop/sidebar/SidebarFilters";
 import getAllTags from "@/lib/api/woocommerce/getAllTags";

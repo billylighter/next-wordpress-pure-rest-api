@@ -1,7 +1,6 @@
 import ProductCategory from "@/types/ProductCategory";
 import buildCategoryChain from "@/lib/breadcrumbs/categoryTree";
 
-
 export default function getDeepestCategoryChain(
     productCategories: ProductCategory[],
     categoryMap: Map<number, ProductCategory>

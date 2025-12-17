@@ -4,7 +4,7 @@ import ProductsGrid from "@/components/shop/ProductsGrid";
 import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
 import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
 import getAllTags from "@/lib/api/woocommerce/getAllTags";
-import buildCategoryTree from "@/utils/buildCategoryTree";
+import buildCategoryTree from "@/lib/breadcrumbs/buildCategoryTree";
 
 interface ShopPageProps {
     searchParams: Record<string, string | undefined>;
@@ -27,6 +27,8 @@ export default async function ShopPage({ searchParams } : ShopPageProps) {
 
     const categories = await getAllCategories({ per_page: 100 });
     const categoriesTree = buildCategoryTree(categories);
+
+    console.log(categoriesTree)
 
     const tags = await getAllTags({ per_page: 100 });
 
