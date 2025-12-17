@@ -13,6 +13,9 @@ import OnSaleBadge from "@/components/single-product/OnSaleBadge";
 import React from "react";
 import ProductPrice from "@/components/single-product/ProductPrice";
 import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
+import ProductTagsLinks from "@/components/single-product/ProductTagsLinks";
+import {FaRegCircle} from "react-icons/fa";
+import {LiaTagSolid} from "react-icons/lia";
 
 interface ProductPageProps {
     params: {
@@ -30,14 +33,13 @@ export default async function ProductPage({params}: ProductPageProps) {
 
     const breadcrumbs = await getProductBreadcrumbs(product);
 
-    console.log(breadcrumbs)
-
     const groupedProducts =
         (product.grouped_products.length !== 0) ? await getAllProducts(
             {include: product.grouped_products.join(',')}
         ) : [];
 
     const sortedCategories = [...product.categories].sort((a, b) => a.id - b.id);
+    const tags = product.tags;
 
     return (
         <div className="container mx-auto">
@@ -82,7 +84,11 @@ export default async function ProductPage({params}: ProductPageProps) {
                 <div className={"flex flex-col gap-2 w-full md:w-3/5 px-4"}>
 
 
-                    <ProductCategoriesLinks categories={sortedCategories} categoriesBasePath={"product-category"} className={"me-1 mb-1"}/>
+                    <ProductCategoriesLinks categories={sortedCategories}
+                                            categoriesBasePath={"product-category"}
+                                            className={"me-1 mb-1"}
+                                            icon={<FaRegCircle size={10}
+                                                               className={"me-1"} />}/>
 
                     <div className="flex flex-col md:flex-row flex-wrap justify-between items-center gap-2 my-3">
 
@@ -96,6 +102,12 @@ export default async function ProductPage({params}: ProductPageProps) {
                     {/* DESCRIPTION */}
                     <div className="prose max-w-none text-gray-700 description mb-4"
                          dangerouslySetInnerHTML={{__html: product.description}}
+                    />
+
+                    <ProductTagsLinks categories={tags}
+                                      categoriesBasePath={"tags"}
+                                      className={"me-1 mb-1"}
+                                      icon={<LiaTagSolid size={14} className={"me-1"} />}
                     />
 
                     <ProductGroupedProducts products={groupedProducts}/>

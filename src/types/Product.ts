@@ -1,5 +1,6 @@
 import ProductImage from "@/types/ProductImage";
 import ProductCategory from "@/types/ProductCategory";
+import ProductTag from "@/types/ProductTag";
 
 type Product = {
     id: number;
@@ -16,6 +17,7 @@ type Product = {
     on_sale: boolean;
 
     categories: ProductCategory[];
+    tags: ProductTag[];
     grouped_products: number[];
 };
 

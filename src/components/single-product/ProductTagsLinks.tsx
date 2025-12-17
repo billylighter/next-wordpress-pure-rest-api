@@ -1,15 +1,16 @@
 import CategoryLink from "@/ui/CategoryLink";
 import ProductCategory from "@/types/ProductCategory";
 import {JSX} from "react";
+import ProductTag from "@/types/ProductTag";
 
-interface ProductCategoriesProps {
-    categories: ProductCategory[],
+interface ProductTagsProps {
+    categories: ProductCategory[] | ProductTag[],
     categoriesBasePath: string,
     className: string,
     icon?: JSX.Element;
 }
 
-export default function ProductCategoriesLinks({categories,categoriesBasePath, className, icon}: ProductCategoriesProps) {
+export default function ProductTagsLinks({categories,categoriesBasePath, className, icon}: ProductTagsProps) {
 
     if (!categories || categories.length === 0) return <></>; // optional fallback
 
