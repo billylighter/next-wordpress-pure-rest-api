@@ -1,11 +1,16 @@
 import React from "react";
+import CallToAction from "@/components/CallToAction";
 
 export default async function ProductCategoriesPage() {
 
     return (
 
         <>
-            <h1 className={"text-xl font-semibold text-center my-4"}>Front page</h1>
+            <CallToAction
+                title="Upgrade Your Wardrobe Today"
+                description="Explore our latest collection of trendy clothes and accessories."
+                buttonText="Shop Now"
+            />
 
         </>
 
