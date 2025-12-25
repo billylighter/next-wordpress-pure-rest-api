@@ -145,11 +145,15 @@ export default function SidebarFilters({
                     onChange={setSelectedCategories}
                 />
 
+                <hr className={"text-gray-300"}/>
+
                 <SidebarTagFilter
                     tags={tags}
                     selectedIds={selectedTags}
                     onChange={setSelectedTags}
                 />
+
+                <hr className={"text-gray-300"}/>
 
                 <SidebarPriceFilter
                     min={0}
@@ -160,6 +164,8 @@ export default function SidebarFilters({
                         setMaxPrice(max);
                     }}
                 />
+
+
 
                 <button
                     type="submit"

@@ -20,7 +20,7 @@ export default function SidebarPriceFilter({
                                            }: Props) {
     return (
         <div className="space-y-2">
-            <h3 className="font-semibold">Price</h3>
+            <h3 className="mb-4 text-lg font-semibold">Price</h3>
 
             <div className="flex gap-2">
                 <input

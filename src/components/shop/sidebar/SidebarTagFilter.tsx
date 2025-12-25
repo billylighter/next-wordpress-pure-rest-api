@@ -25,7 +25,7 @@ export default function SidebarTagFilter({
 
     return (
         <div>
-            <h3 className="mb-3 text-lg font-semibold">Tags</h3>
+            <h3 className="mb-4 text-lg font-semibold">Tags</h3>
 
             <div className="flex flex-wrap gap-2">
                 {tags.map((tag) => {
