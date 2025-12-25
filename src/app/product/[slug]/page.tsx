@@ -41,6 +41,8 @@ export default async function ProductPage({params}: ProductPageProps) {
     const sortedCategories = [...product.categories].sort((a, b) => a.id - b.id);
     const tags = product.tags;
 
+    console.log(breadcrumbs)
+
     return (
         <div className="container mx-auto">
 

@@ -5,12 +5,14 @@ import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
 import getAllCategories from "@/lib/api/woocommerce/getAllCategories";
 import getAllTags from "@/lib/api/woocommerce/getAllTags";
 import buildCategoryTree from "@/lib/breadcrumbs/buildCategoryTree";
+import Breadcrumbs from "@/ui/Breadcrumbs";
+import React from "react";
 
 interface ShopPageProps {
     searchParams: Record<string, string | undefined>;
 }
 
-export default async function ShopPage({ searchParams }: ShopPageProps) {
+export default async function ShopPage({searchParams}: ShopPageProps) {
     const params = await searchParams;
 
     // search
@@ -36,10 +38,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         : undefined;
 
     // sidebar data
-    const categories = await getAllCategories({ per_page: 100 });
+    const categories = await getAllCategories({per_page: 100});
     const categoriesTree = buildCategoryTree(categories);
 
-    const tags = await getAllTags({ per_page: 100 });
+    const tags = await getAllTags({per_page: 100});
 
     // products
     const products = await getAllProducts({
@@ -55,19 +57,35 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         max_price: maxPrice,
     });
 
-    return (
-        <div className="flex flex-col lg:flex-row gap-8">
-            <Sidebar
-                categories={categoriesTree}
-                tags={tags}
-                initialSearch={search}
-                initialCategories={categoryIds}
-                initialTags={tagIds}
-            />
+    const breadcrumbs = [
+        {
+            label: "Home",
+            href: "/"
+        },
+        {
+            label: "Shop",
+            href: "/shop"
+        },
+    ];
 
-            <main className="w-full lg:w-4/5">
-                <ProductsGrid products={products} />
-            </main>
-        </div>
+    return (
+        <>
+            <div className={"mb-4"}>
+                <Breadcrumbs items={breadcrumbs}/>
+            </div>
+            <div className="flex flex-col lg:flex-row gap-8">
+                <Sidebar
+                    categories={categoriesTree}
+                    tags={tags}
+                    initialSearch={search}
+                    initialCategories={categoryIds}
+                    initialTags={tagIds}
+                />
+
+                <main className="w-full lg:w-4/5">
+                    <ProductsGrid products={products}/>
+                </main>
+            </div>
+        </>
     );
 }
