@@ -16,6 +16,8 @@ import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
 import ProductTagsLinks from "@/components/single-product/ProductTagsLinks";
 import {FaRegCircle} from "react-icons/fa";
 import {LiaTagSolid} from "react-icons/lia";
+import getProductVariations from "@/lib/api/woocommerce/getProductVariations";
+import ProductVariations from "@/components/single-product/ProductVariations";
 
 interface ProductPageProps {
     params: {
@@ -31,6 +33,8 @@ export default async function ProductPage({params}: ProductPageProps) {
 
     if (!product) return notFound();
 
+    const productAttributes = product.attributes;
+
     const breadcrumbs = await getProductBreadcrumbs(product);
 
     const groupedProducts =
@@ -38,10 +42,14 @@ export default async function ProductPage({params}: ProductPageProps) {
             {include: product.grouped_products.join(',')}
         ) : [];
 
+    const productVariations =
+        (product.variations.length !== 0) ? await getProductVariations(product.id, {per_page: 50}) : [];
+
+
     const sortedCategories = [...product.categories].sort((a, b) => a.id - b.id);
     const tags = product.tags;
 
-    console.log(breadcrumbs)
+    // console.log(product)
 
     return (
         <div className="container mx-auto">
@@ -111,6 +119,8 @@ export default async function ProductPage({params}: ProductPageProps) {
                                       className={"me-1 mb-1"}
                                       icon={<LiaTagSolid size={14} className={"me-1"} />}
                     />
+
+                    <ProductVariations products={productVariations} attributes={productAttributes} />
 
                     <ProductGroupedProducts products={groupedProducts}/>
 

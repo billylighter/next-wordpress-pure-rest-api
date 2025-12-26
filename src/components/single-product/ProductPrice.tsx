@@ -7,6 +7,11 @@ interface ProductPriceProps {
 }
 
 export default function ProductPrice({product, className} : ProductPriceProps){
+
+    // console.log(product);
+
+
+
     return (
         <div className={className}>
             <p className="font-semibold text-black">
