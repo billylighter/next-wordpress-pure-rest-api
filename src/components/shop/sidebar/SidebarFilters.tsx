@@ -1,14 +1,14 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import SidebarSearch from "./SidebarSearch";
-import SidebarCategoryFilter from "./SidebarCategoryFilter";
-import SidebarTagFilter from "./SidebarTagFilter";
-import SidebarPriceFilter from "@/components/shop/sidebar/SidebarPriceFilter";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useState} from "react";
+import SidebarSearch from "./filters/SidebarSearch";
+import SidebarCategoryFilter from "./filters/SidebarCategoryFilter";
+import SidebarTagFilter from "./filters/SidebarTagFilter";
+import SidebarPriceFilter from "@/components/shop/sidebar/filters/SidebarPriceFilter";
 import CategoryTree from "@/types/CategoryTree";
 import ProductTag from "@/types/ProductTag";
-import { RiResetRightLine } from "react-icons/ri";
+import {RiResetRightLine} from "react-icons/ri";
 import NProgress from "nprogress";
 
 interface SidebarFiltersProps {
@@ -19,13 +19,14 @@ interface SidebarFiltersProps {
     initialTags: number[];
 }
 
-export default function SidebarFilters({
-                                           categories,
-                                           tags,
-                                           initialSearch,
-                                           initialCategories,
-                                           initialTags,
-                                       }: SidebarFiltersProps) {
+export default function SidebarFilters(
+    {
+        categories,
+        tags,
+        initialSearch,
+        initialCategories,
+        initialTags,
+    }: SidebarFiltersProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -158,19 +159,15 @@ export default function SidebarFilters({
                 <SidebarPriceFilter
                     min={0}
                     max={1000}
-                    value={{ min: minPrice, max: maxPrice }}
-                    onChange={({ min, max }) => {
+                    value={{min: minPrice, max: maxPrice}}
+                    onChange={({min, max}) => {
                         setMinPrice(min);
                         setMaxPrice(max);
                     }}
                 />
 
-
-
-                <button
-                    type="submit"
-                    className="w-full bg-gray-900 hover:bg-gray-700 text-white py-2 rounded cursor-pointer"
-                >
+                <button type="submit"
+                        className="w-full bg-gray-900 hover:bg-gray-700 text-white py-2 rounded cursor-pointer">
                     Apply filters
                 </button>
             </form>
@@ -180,7 +177,7 @@ export default function SidebarFilters({
                     onClick={resetFilters}
                     className="mt-2 inline-flex justify-center items-center w-full bg-amber-600 hover:bg-amber-500 text-white py-2 rounded cursor-pointer"
                 >
-                    <RiResetRightLine className="me-2" />
+                    <RiResetRightLine className="me-2"/>
                     Reset filters
                 </button>
             )}
