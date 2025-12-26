@@ -7,6 +7,7 @@ import getAllTags from "@/lib/api/woocommerce/getAllTags";
 import buildCategoryTree from "@/lib/breadcrumbs/buildCategoryTree";
 import Breadcrumbs from "@/ui/Breadcrumbs";
 import React from "react";
+import ProductsControls from "@/components/shop/ProductControls";
 
 export const metadata: Metadata = {
     title: "Woo store - shop"
@@ -41,24 +42,25 @@ export default async function ShopPage({searchParams}: ShopPageProps) {
         ? Number(params.max_price)
         : undefined;
 
+    // pagination & sorting from URL
+    const perPage = params.per_page ? Number(params.per_page) : 8;
+    const sortOrder = params.sort === "desc" ? "desc" : "asc";
+
     // sidebar data
-    const categories = await getAllCategories({per_page: 100});
+    const categories = await getAllCategories({ per_page: 100 });
     const categoriesTree = buildCategoryTree(categories);
 
-    const tags = await getAllTags({per_page: 100});
+    const tags = await getAllTags({ per_page: 100 });
 
     // products
     const products = await getAllProducts({
-        per_page: 20,
+        per_page: perPage,
         search,
-        category: categoryIds.length
-            ? categoryIds.join(",")
-            : undefined,
-        tag: tagIds.length
-            ? tagIds.join(",")
-            : undefined,
+        category: categoryIds.length ? categoryIds.join(",") : undefined,
+        tag: tagIds.length ? tagIds.join(",") : undefined,
         min_price: minPrice,
         max_price: maxPrice,
+        order: sortOrder,
     });
 
     const breadcrumbs = [
@@ -87,6 +89,9 @@ export default async function ShopPage({searchParams}: ShopPageProps) {
                 />
 
                 <main className="w-full lg:w-4/5">
+
+                    <ProductsControls />
+
                     <ProductsGrid products={products}/>
                 </main>
             </div>

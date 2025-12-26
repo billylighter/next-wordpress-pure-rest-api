@@ -6,7 +6,8 @@ export default interface WooRequestProps {
     category?: string | number,
     tag?: string | number,
     include?: string,
-    search?:string,
+    search?: string,
     min_price?: string | number,
     max_price?: string | number,
+    order?: string;
 }
