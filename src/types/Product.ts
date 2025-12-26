@@ -2,6 +2,7 @@ import ProductImage from "@/types/ProductImage";
 import ProductCategory from "@/types/ProductCategory";
 import ProductTag from "@/types/ProductTag";
 import WooProductAttribute from "@/types/WooProductAttribute";
+import ProductAttribute from "@/types/ProductAttribute";
 
 type Product = {
     id: number;
@@ -21,7 +22,7 @@ type Product = {
     tags: ProductTag[];
     grouped_products: number[];
     variations: Product[] | [];
-    attributes: WooProductAttribute[] | [];
+    attributes: ProductAttribute[] | [];
 };
 
 export default Product;
