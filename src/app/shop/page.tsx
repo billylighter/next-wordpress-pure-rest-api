@@ -1,4 +1,4 @@
-// app/shop/page.tsx
+import {Metadata} from "next";
 import Sidebar from "@/components/shop/sidebar/Sidebar";
 import ProductsGrid from "@/components/shop/ProductsGrid";
 import getAllProducts from "@/lib/api/woocommerce/getAllProducts";
@@ -7,6 +7,10 @@ import getAllTags from "@/lib/api/woocommerce/getAllTags";
 import buildCategoryTree from "@/lib/breadcrumbs/buildCategoryTree";
 import Breadcrumbs from "@/ui/Breadcrumbs";
 import React from "react";
+
+export const metadata: Metadata = {
+    title: "Woo store - shop"
+};
 
 interface ShopPageProps {
     searchParams: Record<string, string | undefined>;
