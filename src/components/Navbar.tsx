@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
+import NavbarBrand from "@/components/NavbarBrand";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function Navbar() {
             <header className=" bg-white shadow">
                 <nav className="max-w-4xl mx-auto p-4 text-gray-800  px-4 py-3 flex items-center justify-between sticky top-0 w-full z-50">
                     {/* Logo / Brand */}
-                    <Link href={"/"} className="text-lg font-bold">MyBrand</Link>
+                    <NavbarBrand />
 
                     {/* Menu Toggle Button */}
                     <button
@@ -44,7 +45,11 @@ export default function Navbar() {
             <div className={`fixed top-0 right-0 h-screen w-64 bg-white shadow-lg transform transition-transform duration-300 z-20 ${
                     isOpen ? "translate-x-0" : "translate-x-full"
                 }`}>
-                <div className="flex flex-col mt-16 px-4">
+
+                <div className="p-4">
+                    <NavbarBrand />
+                </div>
+                <div className="flex flex-col px-4">
                     <Link href="/" className="py-3 text-gray-800 hover:text-black border-b border-gray-200" onClick={() => setIsOpen(false)}>
                         Home
                     </Link>
