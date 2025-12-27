@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import { useState, useMemo } from "react";
 import Product from "@/types/Product";
 import ProductAttribute from "@/types/ProductAttribute";
 
@@ -9,21 +9,18 @@ type Props = {
     attributes: ProductAttribute[];
 };
 
-export default function ProductVariations({products, attributes}: Props) {
-
+export default function ProductVariations({ products, attributes }: Props) {
     const [selected, setSelected] = useState<Record<number, string>>(() => {
         const defaults: Record<number, string> = {};
-
-        attributes?.forEach(attr => {
+        attributes.forEach(attr => {
             if (attr.options?.length) {
                 defaults[attr.id] = attr.options[0];
             }
         });
-
         return defaults;
     });
 
-    if (!attributes?.length) return null;
+    if (!attributes.length) return null;
 
     const handleChange = (attributeId: number, value: string) => {
         setSelected(prev => ({
@@ -32,54 +29,67 @@ export default function ProductVariations({products, attributes}: Props) {
         }));
     };
 
-    const matchedProduct = products.find(product =>
-        Object.entries(selected).every(([attrId, option]) =>
-            product.attributes.some(
-                attr =>
-                    attr.id === Number(attrId) &&
-                    attr.option === option
-            )
-        )
-    );
+    /**
+     * Проверяем, доступна ли опция с учетом текущего выбора
+     */
+    const isOptionAvailable = (attributeId: number, option: string) => {
+        return products.some(product =>
+            product.attributes.every(attr => {
+                // для текущего атрибута проверяем option
+                if (attr.id === attributeId) {
+                    return attr.option === option;
+                }
 
-    const matchedProductId = matchedProduct?.id ?? null;
+                // для остальных — текущее выбранное значение
+                return selected[attr.id] === attr.option;
+            })
+        );
+    };
+
+    /**
+     * Текущая выбранная вариация
+     */
+    const matchedProduct = useMemo(() => {
+        return products.find(product =>
+            product.attributes.every(attr =>
+                selected[attr.id] === attr.option
+            )
+        );
+    }, [products, selected]);
 
     return (
         <div className="space-y-6">
             {attributes.map(attribute => (
                 <div key={attribute.id}>
-                    <div className="mb-2 text-gray-700 font-bold">
+                    <div className="mb-2 font-semibold text-gray-800">
                         {attribute.name}
                     </div>
 
                     <ul className="flex flex-wrap gap-3">
                         {attribute.options.map(option => {
-                            const inputId = `attr-${attribute.id}-${option}`;
+                            const available = isOptionAvailable(attribute.id, option);
+                            const active = selected[attribute.id] === option;
 
                             return (
                                 <li key={option}>
-                                    <label
-                                        htmlFor={inputId}
-                                        className={`cursor-pointer rounded border px-3 py-1
+                                    <button
+                                        type="button"
+                                        disabled={!available}
+                                        onClick={() => available && handleChange(attribute.id, option)}
+                                        className={`
+                                            rounded border px-3 py-1 text-sm
+                                            transition
                                             ${
-                                            selected[attribute.id] === option
+                                            active
                                                 ? "border-black bg-black text-white"
-                                                : "border-gray-300"
-                                        }`}
+                                                : available
+                                                    ? "border-gray-300 hover:border-black"
+                                                    : "border-gray-200 text-gray-400 cursor-not-allowed line-through"
+                                        }
+                                        `}
                                     >
-                                        <input
-                                            type="radio"
-                                            id={inputId}
-                                            name={`attribute-${attribute.id}`}
-                                            value={option}
-                                            checked={selected[attribute.id] === option}
-                                            onChange={() =>
-                                                handleChange(attribute.id, option)
-                                            }
-                                            className="hidden"
-                                        />
                                         {option}
-                                    </label>
+                                    </button>
                                 </li>
                             );
                         })}
@@ -87,9 +97,8 @@ export default function ProductVariations({products, attributes}: Props) {
                 </div>
             ))}
 
-            {/* Debug / usage example */}
             <div className="text-sm text-gray-500">
-                Selected product ID: {matchedProductId ?? "—"}
+                Selected product ID: {matchedProduct?.id ?? "—"}
             </div>
         </div>
     );
