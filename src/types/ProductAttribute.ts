@@ -5,7 +5,7 @@ type ProductAttribute = {
     position: number,
     slug: string,
     variation: boolean,
-    visible: boolean
+    visible: boolean,
 }
 
 export default ProductAttribute;

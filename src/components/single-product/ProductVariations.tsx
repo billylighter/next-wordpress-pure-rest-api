@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import Product from "@/types/Product";
 import ProductAttribute from "@/types/ProductAttribute";
 
@@ -29,33 +29,24 @@ export default function ProductVariations({ products, attributes }: Props) {
         }));
     };
 
-    /**
-     * Проверяем, доступна ли опция с учетом текущего выбора
-     */
     const isOptionAvailable = (attributeId: number, option: string) => {
         return products.some(product =>
             product.attributes.every(attr => {
-                // для текущего атрибута проверяем option
+
                 if (attr.id === attributeId) {
                     return attr.option === option;
                 }
 
-                // для остальных — текущее выбранное значение
                 return selected[attr.id] === attr.option;
             })
         );
     };
 
-    /**
-     * Текущая выбранная вариация
-     */
-    const matchedProduct = useMemo(() => {
-        return products.find(product =>
-            product.attributes.every(attr =>
-                selected[attr.id] === attr.option
-            )
-        );
-    }, [products, selected]);
+    const matchedProduct = products.find(product =>
+        product.attributes.every(attr =>
+            selected[attr.id] === attr.option
+        )
+    );
 
     return (
         <div className="space-y-6">
@@ -75,10 +66,11 @@ export default function ProductVariations({ products, attributes }: Props) {
                                     <button
                                         type="button"
                                         disabled={!available}
-                                        onClick={() => available && handleChange(attribute.id, option)}
+                                        onClick={() =>
+                                            available && handleChange(attribute.id, option)
+                                        }
                                         className={`
-                                            rounded border px-3 py-1 text-sm
-                                            transition
+                                            rounded border px-3 py-1 text-sm transition
                                             ${
                                             active
                                                 ? "border-black bg-black text-white"
